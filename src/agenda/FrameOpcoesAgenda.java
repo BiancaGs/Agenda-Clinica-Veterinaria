@@ -45,6 +45,8 @@ public class FrameOpcoesAgenda extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel1.setText("Opções Agendamento");
 
+        jButtonConfirmar.setBackground(new java.awt.Color(153, 153, 153));
+        jButtonConfirmar.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jButtonConfirmar.setText("Confirmar");
         jButtonConfirmar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButtonConfirmar.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -58,6 +60,8 @@ public class FrameOpcoesAgenda extends javax.swing.JFrame {
             }
         });
 
+        jButtonCancelar.setBackground(new java.awt.Color(153, 153, 153));
+        jButtonCancelar.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jButtonCancelar.setText("Cancelar");
         jButtonCancelar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButtonCancelar.addActionListener(new java.awt.event.ActionListener() {
@@ -99,7 +103,7 @@ public class FrameOpcoesAgenda extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 209, Short.MAX_VALUE)
+                        .addGap(0, 176, Short.MAX_VALUE)
                         .addComponent(jButtonCancelar)
                         .addGap(18, 18, 18)
                         .addComponent(jButtonConfirmar)
