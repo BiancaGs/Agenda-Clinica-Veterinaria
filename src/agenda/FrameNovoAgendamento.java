@@ -26,6 +26,7 @@ public class FrameNovoAgendamento extends javax.swing.JFrame {
         initComponents();
         formatarData();
         formatarCPF();
+        formatarHorario();
     }
 
     /**
@@ -250,6 +251,15 @@ public class FrameNovoAgendamento extends javax.swing.JFrame {
             mask.install(jFormattedTextFieldCPFCliente);
         } catch (ParseException ex) {
             JOptionPane.showMessageDialog(null, "Erro ao formatar campo CPF");
+        }
+    }
+    
+    private void formatarHorario() {
+        try {
+            MaskFormatter mask = new MaskFormatter("##:##");
+            mask.install(jFormattedTextFieldHorario);
+        } catch (ParseException ex) {
+            JOptionPane.showMessageDialog(null, "Erro ao formatar campo HORARIO");
         }
     }
 
