@@ -12,7 +12,14 @@ package agenda;
  */
 public class FacadeAgenda {
     
+    // Variáveis de Instância
+    Cliente cliente = null;
+    Paciente paciente = null;
+    Veterinario veterinario = null;
+    Agenda agenda = null;
+    
+    
     public static void main(String[] args){
-        
+        new FrameOpcoesAgenda().setVisible(true);
     }
 }
