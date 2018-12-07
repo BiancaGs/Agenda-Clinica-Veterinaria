@@ -5,6 +5,7 @@
  */
 package agenda;
 
+import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -27,6 +28,7 @@ public class FrameNovoAgendamento extends javax.swing.JFrame {
         formatarData();
         formatarCPF();
         formatarHorario();
+        formatarCRMV();
     }
 
     /**
@@ -46,11 +48,11 @@ public class FrameNovoAgendamento extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jFormattedTextFieldData = new javax.swing.JFormattedTextField();
         jFormattedTextFieldHorario = new javax.swing.JFormattedTextField();
-        jTextFieldVeterinario = new javax.swing.JTextField();
         jTextFieldPaciente = new javax.swing.JTextField();
         jButtonCancelar = new javax.swing.JButton();
         jButtonConfirmar = new javax.swing.JButton();
         jFormattedTextFieldCPFCliente = new javax.swing.JFormattedTextField();
+        jFormattedTextFieldCRMV = new javax.swing.JFormattedTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(400, 297));
@@ -65,7 +67,7 @@ public class FrameNovoAgendamento extends javax.swing.JFrame {
         jLabel3.setText("Horário:");
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel4.setText("Veterinário:");
+        jLabel4.setText("CRMV Veterinário:");
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel5.setText("Paciente:");
@@ -80,12 +82,6 @@ public class FrameNovoAgendamento extends javax.swing.JFrame {
         jFormattedTextFieldHorario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jFormattedTextFieldHorarioActionPerformed(evt);
-            }
-        });
-
-        jTextFieldVeterinario.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldVeterinarioActionPerformed(evt);
             }
         });
 
@@ -122,6 +118,12 @@ public class FrameNovoAgendamento extends javax.swing.JFrame {
             }
         });
 
+        jFormattedTextFieldCRMV.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jFormattedTextFieldCRMVActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -141,14 +143,14 @@ public class FrameNovoAgendamento extends javax.swing.JFrame {
                             .addComponent(jLabel5))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jFormattedTextFieldHorario, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
-                            .addComponent(jTextFieldVeterinario, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
-                            .addComponent(jTextFieldPaciente, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
-                            .addComponent(jFormattedTextFieldCPFCliente, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
-                            .addComponent(jFormattedTextFieldData, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(jFormattedTextFieldHorario)
+                            .addComponent(jTextFieldPaciente)
+                            .addComponent(jFormattedTextFieldCPFCliente)
+                            .addComponent(jFormattedTextFieldData)
+                            .addComponent(jFormattedTextFieldCRMV, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(150, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
+                .addGap(0, 232, Short.MAX_VALUE)
                 .addComponent(jButtonCancelar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButtonConfirmar)
@@ -170,7 +172,7 @@ public class FrameNovoAgendamento extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(jTextFieldVeterinario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jFormattedTextFieldCRMV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
@@ -179,7 +181,7 @@ public class FrameNovoAgendamento extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jFormattedTextFieldCPFCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonConfirmar)
                     .addComponent(jButtonCancelar))
@@ -192,10 +194,6 @@ public class FrameNovoAgendamento extends javax.swing.JFrame {
     private void jButtonConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConfirmarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButtonConfirmarActionPerformed
-
-    private void jTextFieldVeterinarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldVeterinarioActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldVeterinarioActionPerformed
 
     private void jTextFieldPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldPacienteActionPerformed
         // TODO add your handling code here:
@@ -211,7 +209,24 @@ public class FrameNovoAgendamento extends javax.swing.JFrame {
 
     private void jButtonConfirmarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonConfirmarMouseClicked
         // TODO add your handling code here:
+        String data = jFormattedTextFieldData.getText();
+        String horario = jFormattedTextFieldHorario.getText();
+        String CRMVVeterinario = jFormattedTextFieldCRMV.getText();
+        String nomePaciente = jTextFieldPaciente.getText();
+        String CPFCliente = jFormattedTextFieldCPFCliente.getText();
+        
+        OperacoesBD op = new OperacoesBD();
+        try {
+            
+        } catch (SQLException e) {
+            
+        }
+        
     }//GEN-LAST:event_jButtonConfirmarMouseClicked
+
+    private void jFormattedTextFieldCRMVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFormattedTextFieldCRMVActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jFormattedTextFieldCRMVActionPerformed
 
     /**
      * @param args the command line arguments
@@ -276,11 +291,21 @@ public class FrameNovoAgendamento extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Erro ao formatar campo HORARIO");
         }
     }
-
+    
+    private void formatarCRMV() {
+        try {
+            MaskFormatter mask = new MaskFormatter("######");
+            mask.install(jFormattedTextFieldCRMV);
+        } catch (ParseException ex) {
+            JOptionPane.showMessageDialog(null, "Erro ao formatar campo CRMV");
+        }
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonCancelar;
     private javax.swing.JButton jButtonConfirmar;
     private javax.swing.JFormattedTextField jFormattedTextFieldCPFCliente;
+    private javax.swing.JFormattedTextField jFormattedTextFieldCRMV;
     private javax.swing.JFormattedTextField jFormattedTextFieldData;
     private javax.swing.JFormattedTextField jFormattedTextFieldHorario;
     private javax.swing.JLabel jLabel1;
@@ -290,6 +315,5 @@ public class FrameNovoAgendamento extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JTextField jTextFieldPaciente;
-    private javax.swing.JTextField jTextFieldVeterinario;
     // End of variables declaration//GEN-END:variables
 }

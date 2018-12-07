@@ -43,18 +43,18 @@
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="jFormattedTextFieldHorario" pref="130" max="32767" attributes="0"/>
-                          <Component id="jTextFieldVeterinario" pref="130" max="32767" attributes="0"/>
-                          <Component id="jTextFieldPaciente" alignment="0" pref="130" max="32767" attributes="0"/>
-                          <Component id="jFormattedTextFieldCPFCliente" alignment="0" pref="130" max="32767" attributes="0"/>
-                          <Component id="jFormattedTextFieldData" alignment="0" pref="130" max="32767" attributes="0"/>
+                          <Component id="jFormattedTextFieldHorario" max="32767" attributes="0"/>
+                          <Component id="jTextFieldPaciente" alignment="0" max="32767" attributes="0"/>
+                          <Component id="jFormattedTextFieldCPFCliente" alignment="0" max="32767" attributes="0"/>
+                          <Component id="jFormattedTextFieldData" alignment="0" max="32767" attributes="0"/>
+                          <Component id="jFormattedTextFieldCRMV" min="-2" pref="130" max="-2" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
-              <EmptySpace min="180" max="32767" attributes="0"/>
+              <EmptySpace pref="150" max="32767" attributes="0"/>
           </Group>
           <Group type="102" alignment="1" attributes="0">
-              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+              <EmptySpace min="0" pref="232" max="32767" attributes="0"/>
               <Component id="jButtonCancelar" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="jButtonConfirmar" min="-2" max="-2" attributes="0"/>
@@ -80,7 +80,7 @@
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jTextFieldVeterinario" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jFormattedTextFieldCRMV" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -92,7 +92,7 @@
                   <Component id="jFormattedTextFieldCPFCliente" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jLabel6" alignment="3" max="32767" attributes="0"/>
               </Group>
-              <EmptySpace pref="44" max="32767" attributes="0"/>
+              <EmptySpace pref="40" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jButtonConfirmar" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jButtonCancelar" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -132,7 +132,7 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Tahoma" size="12" style="0"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Veterin&#xe1;rio:"/>
+        <Property name="text" type="java.lang.String" value="CRMV Veterin&#xe1;rio:"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel5">
@@ -165,11 +165,6 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jFormattedTextFieldHorarioActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JTextField" name="jTextFieldVeterinario">
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextFieldVeterinarioActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="jTextFieldPaciente">
@@ -215,6 +210,11 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jFormattedTextFieldCPFClienteActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JFormattedTextField" name="jFormattedTextFieldCRMV">
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jFormattedTextFieldCRMVActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>
