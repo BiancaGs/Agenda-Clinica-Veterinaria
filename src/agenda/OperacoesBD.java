@@ -7,6 +7,7 @@ package agenda;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 /**
@@ -34,6 +35,17 @@ public class OperacoesBD {
         
         stmt.close();
         
+    }
+    
+    public ResultSet buscarVeterinario(Connection conn, String CRMVVeterinario) throws SQLException {
+        
+        String selectSQL = "SELECT * FROM veterinario WHERE crmv_veterinario = '?';";
+        
+        PreparedStatement stmt = conn.prepareStatement(selectSQL);
+        stmt.setString(1, CRMVVeterinario);
+        
+        ResultSet rs = stmt.executeQuery();
+        return rs;
     }
     
     

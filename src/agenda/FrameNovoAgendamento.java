@@ -250,7 +250,7 @@ public class FrameNovoAgendamento extends javax.swing.JFrame {
         
         FacadeAgenda facade = new FacadeAgenda(c, p, v, a);
         
-        facade.agendarAgendamento(c, p, v, a);
+        facade.agendarAgendamento();
 
         
     }//GEN-LAST:event_jButtonConfirmarMouseClicked

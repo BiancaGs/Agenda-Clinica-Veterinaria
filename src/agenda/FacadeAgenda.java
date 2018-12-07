@@ -39,18 +39,18 @@ public class FacadeAgenda {
         new FrameOpcoesAgenda().setVisible(true);
     }
     
-    public void agendarAgendamento(Cliente c, Paciente p, Veterinario v, Agendamento a) {
+    public void agendarAgendamento() {
         
-        if (!a.verificarExpediente(a.getHorarioAgendamento())) {
+        if (!agendamento.verificarExpediente(agendamento.getHorarioAgendamento())) {
             JOptionPane.showMessageDialog(null, "Horário fora do Expediente!");
             return;
         }
         
         conn = Conexao.getConnection();
-        OperacoesBD op = new OperacoesBD();
+        OperacoesBD op = new OperacoesBD();              
         
         try {
-            op.inserirAgendamento(conn, c, p, a, v);
+            op.inserirAgendamento(conn, this.cliente, this.paciente, this.agendamento, this.veterinario);
             JOptionPane.showMessageDialog(null, "Agendamento Realizado com Sucesso!");
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Agendamento Não Realizado!");
