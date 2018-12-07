@@ -5,19 +5,14 @@
  */
 package agenda;
 
-import java.util.Date;
-
 /**
  *
  * @author Bianca
  */
-public class Agendamento {
+public class Notificacao {
     
-    private Date dataAgendamento; 
-
-    public void setDataAgendamento(Date dataAgendamento) {
-        this.dataAgendamento = dataAgendamento;
+    public void enviarEmail(String email) {
+        
     }
-    
     
 }
