@@ -7,8 +7,8 @@ package agenda;
 
 import java.sql.SQLException;
 import java.text.ParseException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import javax.swing.JOptionPane;
 import javax.swing.text.MaskFormatter;
 
@@ -215,12 +215,32 @@ public class FrameNovoAgendamento extends javax.swing.JFrame {
         String nomePaciente = jTextFieldPaciente.getText();
         String CPFCliente = jFormattedTextFieldCPFCliente.getText();
         
-        OperacoesBD op = new OperacoesBD();
-        try {
-            
-        } catch (SQLException e) {
-            
-        }
+        // Preparamos as classes
+        Cliente c = new Cliente();
+        c.setCPFCliente(CPFCliente);
+        
+        Veterinario v = new Veterinario();
+        v.setCRMV(CRMVVeterinario);
+        
+        Paciente p = new Paciente();
+        p.setNomePaciente(nomePaciente);
+        
+        // Formata a data para o MySQL
+        DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        LocalDate dataFormatada = LocalDate.parse(data, formato);
+        System.out.println("Data formatada = " + dataFormatada);
+        
+        
+        
+        FacadeAgenda facade = new FacadeAgenda(c, p, v, a);
+        
+        facade.agendarAgendamento(facade.cliente, facade.paciente, v, dataFormatada);
+                
+        System.out.println(data);
+        System.out.println(horario);
+        System.out.println(CRMVVeterinario);
+        System.out.println(nomePaciente);
+        System.out.println(CPFCliente);
         
     }//GEN-LAST:event_jButtonConfirmarMouseClicked
 

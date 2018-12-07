@@ -11,4 +11,16 @@ package agenda;
  */
 public class Paciente {
     
+    private String nomePaciente;
+    
+    // Getters
+    public void setNomePaciente(String nomePaciente) {
+        this.nomePaciente = nomePaciente;
+    }
+
+    // Setters
+    public String getNomePaciente() {
+        return nomePaciente;
+    }
+    
 }

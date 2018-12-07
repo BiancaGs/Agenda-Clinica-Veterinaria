@@ -11,6 +11,7 @@ import java.sql.SQLException;
 /**
  *
  * @author pietr
+ * 
  */
 public class OperacoesBD {
     

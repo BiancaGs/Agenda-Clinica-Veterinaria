@@ -157,9 +157,8 @@ public class FrameOpcoesAgenda extends javax.swing.JFrame {
 
     private void jButtonConfirmarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonConfirmarMouseClicked
         // TODO add your handling code here:
-        if (jRadioButtonNovoAgendamento.isSelected()) {;
-//            System.out.println("Novo Agendamento Selecionado!");
-            JOptionPane.showMessageDialog(null, "Novo Agendamento Selecionado");
+        if (jRadioButtonNovoAgendamento.isSelected()) {
+            new FrameNovoAgendamento().setVisible(true);
         }
         
         else if (jRadioButtonBuscarAgendamento.isSelected()) {

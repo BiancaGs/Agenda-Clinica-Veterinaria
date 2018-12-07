@@ -25,12 +25,25 @@ public class Cliente {
     public String getNomeCliente() {
         return this.nomeCliente;
     }
-    public String setEmailCliente() {
+    public String getEmailCliente() {
         return this.emailCliente;
     }
     public String getCelularCliente() {
         return this.celularCliente;
-    }   
-    
+    }
+
+    // Setters
+    public void setCPFCliente(String CPFCliente) {
+        this.CPFCliente = CPFCliente;
+    }
+    public void setNomeCliente(String nomeCliente) {
+        this.nomeCliente = nomeCliente;
+    }
+    public void setEmailCliente(String emailCliente) {
+        this.emailCliente = emailCliente;
+    }
+    public void setCelularCliente(String celularCliente) {
+        this.celularCliente = celularCliente;
+    }
     
 }
