@@ -149,12 +149,16 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JFormattedTextField" name="jFormattedTextFieldData">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="  /  /    "/>
+      </Properties>
     </Component>
     <Component class="javax.swing.JFormattedTextField" name="jFormattedTextFieldHorario">
       <Properties>
         <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
           <Format subtype="1" type="2"/>
         </Property>
+        <Property name="text" type="java.lang.String" value="  :"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jFormattedTextFieldHorarioActionPerformed"/>
@@ -202,6 +206,9 @@
       </Events>
     </Component>
     <Component class="javax.swing.JFormattedTextField" name="jFormattedTextFieldCPFCliente">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="   .   .   -"/>
+      </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jFormattedTextFieldCPFClienteActionPerformed"/>
       </Events>

@@ -45,6 +45,12 @@ public class frameVisualizarAgendamentos extends javax.swing.JFrame {
 
         jLabel2.setText("Data:");
 
+        jFormattedTextFieldData.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jFormattedTextFieldDataActionPerformed(evt);
+            }
+        });
+
         jButton2.setBackground(new java.awt.Color(153, 153, 153));
         jButton2.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jButton2.setText("Confirmar");
@@ -104,6 +110,10 @@ public class frameVisualizarAgendamentos extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jFormattedTextFieldDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFormattedTextFieldDataActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jFormattedTextFieldDataActionPerformed
 
     /**
      * @param args the command line arguments

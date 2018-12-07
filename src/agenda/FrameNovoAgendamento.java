@@ -72,7 +72,10 @@ public class FrameNovoAgendamento extends javax.swing.JFrame {
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel6.setText("CPF Cliente");
 
+        jFormattedTextFieldData.setText("  /  /    ");
+
         jFormattedTextFieldHorario.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(java.text.DateFormat.getTimeInstance(java.text.DateFormat.SHORT))));
+        jFormattedTextFieldHorario.setText("  :");
         jFormattedTextFieldHorario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jFormattedTextFieldHorarioActionPerformed(evt);
@@ -106,6 +109,7 @@ public class FrameNovoAgendamento extends javax.swing.JFrame {
             }
         });
 
+        jFormattedTextFieldCPFCliente.setText("   .   .   -");
         jFormattedTextFieldCPFCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jFormattedTextFieldCPFClienteActionPerformed(evt);

@@ -82,6 +82,9 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JFormattedTextField" name="jFormattedTextFieldData">
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jFormattedTextFieldDataActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="jButton2">
       <Properties>
