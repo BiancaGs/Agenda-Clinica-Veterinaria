@@ -1,6 +1,11 @@
 package agenda;
 
+import java.sql.Connection;
+import java.sql.SQLException;
 import java.time.LocalDate;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -20,6 +25,8 @@ public class FacadeAgenda {
     Veterinario veterinario = null;
     Agendamento agendamento = null;
     
+    private Connection conn;
+    
     // Construtor
     public FacadeAgenda(Cliente c, Paciente p, Veterinario v, Agendamento a) {
         this.agendamento = a;
@@ -32,10 +39,18 @@ public class FacadeAgenda {
         new FrameOpcoesAgenda().setVisible(true);
     }
     
-    public void agendarAgendamento(Cliente c, Paciente p, Veterinario v, LocalDate d) {
+    public void agendarAgendamento(Cliente c, Paciente p, Veterinario v, Agendamento a) {
         
+        
+        conn = Conexao.getConnection();
         OperacoesBD op = new OperacoesBD();
-//        op.inserirAgendamento(conn, c, p, v, a);
+        
+        try {
+            op.inserirAgendamento(conn, c, p, a, v);
+            JOptionPane.showMessageDialog(null, "Agendamento Realizado com Sucesso!");
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Agendamento Não Realizado!");
+        }
     
     }
             
