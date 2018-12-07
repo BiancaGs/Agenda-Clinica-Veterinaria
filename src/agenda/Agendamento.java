@@ -41,4 +41,28 @@ public class Agendamento {
         this.horarioAgendamento = horarioAgendamento;
     }
     
+    public boolean verificarExpediente(Time timeAgendamento){
+        
+        return false;
+    }
+    
+    public boolean verificarDisponibilidade(LocalDate dateAgendamento, Time timeAgendamento){
+        
+        return false;
+    }
+    
+    public Veterinario buscarVeterinario(String CRMVVeterinario){
+        
+        return null;
+    }
+   
+    public Cliente buscarCliente(String CPFCliente){
+        
+        return null;
+    }
+    
+    public Paciente buscarPaciente(String nomePaciente){
+
+        return null;
+    } 
 }
