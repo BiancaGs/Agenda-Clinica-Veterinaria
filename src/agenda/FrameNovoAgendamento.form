@@ -42,9 +42,9 @@
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Component id="jFormattedTextFieldHorario" pref="102" max="32767" attributes="0"/>
                           <Component id="jTextField1" max="32767" attributes="0"/>
-                          <Component id="jFormattedTextFieldData" alignment="0" max="32767" attributes="0"/>
                           <Component id="jTextField2" alignment="0" max="32767" attributes="0"/>
                           <Component id="jFormattedTextFieldCPFCliente" alignment="0" max="32767" attributes="0"/>
+                          <Component id="jFormattedTextFieldData" alignment="0" max="32767" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
