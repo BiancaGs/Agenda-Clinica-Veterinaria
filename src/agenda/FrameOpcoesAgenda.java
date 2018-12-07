@@ -37,8 +37,8 @@ public class FrameOpcoesAgenda extends javax.swing.JFrame {
         jRadioButtonNovoAgendamento = new javax.swing.JRadioButton();
         jRadioButtonBuscarAgendamento = new javax.swing.JRadioButton();
         jRadioButtonAlterarAgendamento = new javax.swing.JRadioButton();
-        jRadioButtonVisualizarAgendamentos = new javax.swing.JRadioButton();
         jRadioButtonExcluirAgendamento = new javax.swing.JRadioButton();
+        jRadioButtonVisualizarAgendamentos = new javax.swing.JRadioButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -87,13 +87,13 @@ public class FrameOpcoesAgenda extends javax.swing.JFrame {
             }
         });
 
-        grupoBotoesOpcoes.add(jRadioButtonVisualizarAgendamentos);
-        jRadioButtonVisualizarAgendamentos.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jRadioButtonVisualizarAgendamentos.setText("Excluir Agendamento");
-
         grupoBotoesOpcoes.add(jRadioButtonExcluirAgendamento);
         jRadioButtonExcluirAgendamento.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jRadioButtonExcluirAgendamento.setText("Visualizar Agendamentos");
+        jRadioButtonExcluirAgendamento.setText("Excluir Agendamento");
+
+        grupoBotoesOpcoes.add(jRadioButtonVisualizarAgendamentos);
+        jRadioButtonVisualizarAgendamentos.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jRadioButtonVisualizarAgendamentos.setText("Visualizar Agendamentos");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -117,8 +117,8 @@ public class FrameOpcoesAgenda extends javax.swing.JFrame {
                             .addComponent(jRadioButtonNovoAgendamento)
                             .addComponent(jRadioButtonAlterarAgendamento)
                             .addComponent(jRadioButtonBuscarAgendamento)
-                            .addComponent(jRadioButtonExcluirAgendamento)
-                            .addComponent(jRadioButtonVisualizarAgendamentos))
+                            .addComponent(jRadioButtonVisualizarAgendamentos)
+                            .addComponent(jRadioButtonExcluirAgendamento))
                         .addGap(0, 0, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
@@ -133,9 +133,9 @@ public class FrameOpcoesAgenda extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jRadioButtonAlterarAgendamento)
                 .addGap(18, 18, 18)
-                .addComponent(jRadioButtonExcluirAgendamento)
-                .addGap(18, 18, 18)
                 .addComponent(jRadioButtonVisualizarAgendamentos)
+                .addGap(18, 18, 18)
+                .addComponent(jRadioButtonExcluirAgendamento)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonConfirmar)
@@ -162,23 +162,29 @@ public class FrameOpcoesAgenda extends javax.swing.JFrame {
         }
         
         else if (jRadioButtonBuscarAgendamento.isSelected()) {
-//            System.out.println("Buscar Agendamento Selecionado!");
-            JOptionPane.showMessageDialog(null, "Buscar Agendamento Selecionado");
+//          System.out.println("Buscar Agendamento Selecionado!");
+//          JOptionPane.showMessageDialog(null, "Buscar Agendamento Selecionado");
+            new FrameBuscar().setVisible(true);
         }
         
         else if (jRadioButtonAlterarAgendamento.isSelected()) {
 //            System.out.println("Alterar Agendamento Selecionado!");
-            JOptionPane.showMessageDialog(null, "Alterar Agendamento Selecionado");
-        }
-        
-        else if (jRadioButtonVisualizarAgendamentos.isSelected()) {
-//            System.out.println("Visualizar Agendamento Selecionado!");
-            JOptionPane.showMessageDialog(null, "Visualizar Agendamento Selecionado");
+//            JOptionPane.showMessageDialog(null, "Alterar Agendamento Selecionado");
+            new FrameAlterar().setVisible(true);
         }
         
         else if (jRadioButtonExcluirAgendamento.isSelected()) {
+//            System.out.println("Visualizar Agendamento Selecionado!");
+//            JOptionPane.showMessageDialog(null, "Visualizar Agendamento Selecionado");
+//            new frameVisualizarAgendamentos().setVisible(true);
+            new FrameExcluirAgendamento().setVisible(true);
+        }
+        
+        else if (jRadioButtonVisualizarAgendamentos.isSelected()) {
 //            System.out.println("Excluir Agendamento Selecionado!");
-            JOptionPane.showMessageDialog(null, "Excluir Agendamento Selecionado");
+//            JOptionPane.showMessageDialog(null, "Excluir Agendamento Selecionado");;
+//            new FrameExcluirAgendamento().setVisible(true);
+            new frameVisualizarAgendamentos().setVisible(true);
         }
     }//GEN-LAST:event_jButtonConfirmarMouseClicked
 

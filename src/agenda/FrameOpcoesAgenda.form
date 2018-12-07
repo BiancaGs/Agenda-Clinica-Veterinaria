@@ -47,8 +47,8 @@
                           <Component id="jRadioButtonNovoAgendamento" alignment="0" max="-2" attributes="0"/>
                           <Component id="jRadioButtonAlterarAgendamento" min="-2" max="-2" attributes="0"/>
                           <Component id="jRadioButtonBuscarAgendamento" min="-2" max="-2" attributes="0"/>
-                          <Component id="jRadioButtonExcluirAgendamento" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="jRadioButtonVisualizarAgendamentos" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jRadioButtonExcluirAgendamento" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                   </Group>
@@ -68,9 +68,9 @@
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="jRadioButtonAlterarAgendamento" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Component id="jRadioButtonExcluirAgendamento" min="-2" max="-2" attributes="0"/>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="jRadioButtonVisualizarAgendamentos" min="-2" max="-2" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Component id="jRadioButtonExcluirAgendamento" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jButtonConfirmar" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -161,7 +161,7 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jRadioButtonAlterarAgendamentoActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JRadioButton" name="jRadioButtonVisualizarAgendamentos">
+    <Component class="javax.swing.JRadioButton" name="jRadioButtonExcluirAgendamento">
       <Properties>
         <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
           <ComponentRef name="grupoBotoesOpcoes"/>
@@ -172,7 +172,7 @@
         <Property name="text" type="java.lang.String" value="Excluir Agendamento"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JRadioButton" name="jRadioButtonExcluirAgendamento">
+    <Component class="javax.swing.JRadioButton" name="jRadioButtonVisualizarAgendamentos">
       <Properties>
         <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
           <ComponentRef name="grupoBotoesOpcoes"/>
