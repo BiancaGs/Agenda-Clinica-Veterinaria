@@ -230,7 +230,9 @@ public class FrameNovoAgendamento extends javax.swing.JFrame {
         LocalDate dataFormatada = LocalDate.parse(data, formato);
         System.out.println("Data formatada = " + dataFormatada);
         
-        
+        Agendamento a = new Agendamento();
+        a.setDataAgendamento(dataFormatada);
+       
         
         FacadeAgenda facade = new FacadeAgenda(c, p, v, a);
         

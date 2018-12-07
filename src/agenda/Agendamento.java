@@ -5,7 +5,7 @@
  */
 package agenda;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 /**
  *
@@ -13,9 +13,13 @@ import java.util.Date;
  */
 public class Agendamento {
     
-    private Date dataAgendamento; 
+    private LocalDate dataAgendamento; 
 
-    public void setDataAgendamento(Date dataAgendamento) {
+    public LocalDate getDataAgendamento() {
+        return dataAgendamento;
+    }
+
+    public void setDataAgendamento(LocalDate dataAgendamento) {
         this.dataAgendamento = dataAgendamento;
     }
     
