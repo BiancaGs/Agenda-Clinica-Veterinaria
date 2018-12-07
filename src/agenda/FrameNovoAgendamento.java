@@ -234,7 +234,7 @@ public class FrameNovoAgendamento extends javax.swing.JFrame {
         // Formata a data para o MySQL
         DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         LocalDate dataFormatada = LocalDate.parse(data, formato);
-        System.out.println("Data formatada = " + dataFormatada);
+        System.out.println("Data formatada = " + dataFormatada.toString());
   
         // Formata o horário para o MySQL
         SimpleDateFormat formatoH = new SimpleDateFormat("HH:mm");;
@@ -246,7 +246,7 @@ public class FrameNovoAgendamento extends javax.swing.JFrame {
         }
         Time horarioFormatado = new Time(dataHorario.getTime());
         
-        System.out.println("Horario formatado: " + horarioFormatado);
+        System.out.println("Horario formatado: " + horarioFormatado.toString());
         
         Agendamento a = new Agendamento(dataFormatada, horarioFormatado);
         
