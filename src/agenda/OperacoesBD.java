@@ -37,6 +37,30 @@ public class OperacoesBD {
         
     }
     
+//    public Veterinario buscarVeterinario(Connection conn, String CRMVVeterinario) throws SQLException {
+//        
+//        String selectSQL = "SELECT * FROM veterinario WHERE crmv_veterinario = '?';";
+//        Veterinario vet = null;
+//
+//        PreparedStatement stmt = conn.prepareStatement(selectSQL);
+//        stmt.setString(1, CRMVVeterinario);
+//        
+//        ResultSet rs = null;
+//        rs = stmt.executeQuery();
+//
+//        while (rs.next()) {
+//            vet = new Veterinario();
+//            vet.setCRMV(rs.getString("crmv_veterinario"));
+//            vet.setNomeVeterinario(rs.getString("nome_veterinario"));
+//            vet.setCelularVeterinario(rs.getString("celular_veterinario"));
+//            vet.setEmailVeterinario(rs.getString("email_veterinario"));
+//        }
+//
+//        rs.close();
+//        stmt.close();
+//
+//        return vet;        
+//    }
     public ResultSet buscarVeterinario(Connection conn, String CRMVVeterinario) throws SQLException {
         
         String selectSQL = "SELECT * FROM veterinario WHERE crmv_veterinario = '?';";
