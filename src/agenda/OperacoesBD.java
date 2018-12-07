@@ -15,7 +15,7 @@ import java.sql.SQLException;
  */
 public class OperacoesBD {
     
-    public void inserirAgendamento(Connection conn, Agendamento novo) throws SQLException {
+    public void inserirAgendamento(Connection conn) throws SQLException {
         
         
         

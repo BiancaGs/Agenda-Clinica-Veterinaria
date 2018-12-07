@@ -6,9 +6,14 @@
 package agenda;
 
 import java.sql.SQLException;
+import java.sql.Time;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.text.MaskFormatter;
 
@@ -215,7 +220,7 @@ public class FrameNovoAgendamento extends javax.swing.JFrame {
         String nomePaciente = jTextFieldPaciente.getText();
         String CPFCliente = jFormattedTextFieldCPFCliente.getText();
         
-        // Preparamos as classes
+        // Criação das classes
         Cliente c = new Cliente();
         c.setCPFCliente(CPFCliente);
         
@@ -225,18 +230,29 @@ public class FrameNovoAgendamento extends javax.swing.JFrame {
         Paciente p = new Paciente();
         p.setNomePaciente(nomePaciente);
         
+        
         // Formata a data para o MySQL
         DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         LocalDate dataFormatada = LocalDate.parse(data, formato);
         System.out.println("Data formatada = " + dataFormatada);
+  
+        // Formata o horário para o MySQL
+        SimpleDateFormat formatoH = new SimpleDateFormat("HH:mm");;
+        Date dataHorario = new Date();
+        try {
+            dataHorario = formatoH.parse(horario);
+        } catch (ParseException ex) {
+            Logger.getLogger(FrameNovoAgendamento.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        Time horarioFormatado = new Time(dataHorario.getTime());
         
-        Agendamento a = new Agendamento();
-        a.setDataAgendamento(dataFormatada);
-       
+        System.out.println("Horario formatado: " + horarioFormatado);
+        
+        Agendamento a = new Agendamento(dataFormatada, horarioFormatado);
         
         FacadeAgenda facade = new FacadeAgenda(c, p, v, a);
         
-        facade.agendarAgendamento(facade.cliente, facade.paciente, v, dataFormatada);
+//        facade.agendarAgendamento(facade.cliente, facade.paciente, v, dataFormatada);
                 
         System.out.println(data);
         System.out.println(horario);

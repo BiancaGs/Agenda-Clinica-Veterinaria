@@ -34,9 +34,9 @@ public class FacadeAgenda {
     
     public void agendarAgendamento(Cliente c, Paciente p, Veterinario v, LocalDate d) {
 
-        
         OperacoesBD op = new OperacoesBD();
-        op.inserirAgendamento(conn, c, p, v, a);
+//        op.inserirAgendamento(conn, c, p, v, a);
+    
     }
             
             

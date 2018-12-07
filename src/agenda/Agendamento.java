@@ -5,6 +5,7 @@
  */
 package agenda;
 
+import java.sql.Time;
 import java.time.LocalDate;
 
 /**
@@ -13,15 +14,31 @@ import java.time.LocalDate;
  */
 public class Agendamento {
     
-    private LocalDate dataAgendamento; 
+    // Variáveis
+    private LocalDate dataAgendamento;
+    private Time horarioAgendamento;
+    
 
+    // Construtor
+    public Agendamento(LocalDate dataAgendamento, Time horarioAgendamento) {
+        this.dataAgendamento = dataAgendamento;
+        this.horarioAgendamento = horarioAgendamento;
+    }
+
+    // Getters
+    public Time getHorarioAgendamento() {
+        return horarioAgendamento;
+    }
     public LocalDate getDataAgendamento() {
         return dataAgendamento;
     }
 
+    // Setters
     public void setDataAgendamento(LocalDate dataAgendamento) {
         this.dataAgendamento = dataAgendamento;
     }
-    
+    public void setHorarioAgendamento(Time horarioAgendamento) {
+        this.horarioAgendamento = horarioAgendamento;
+    }
     
 }
