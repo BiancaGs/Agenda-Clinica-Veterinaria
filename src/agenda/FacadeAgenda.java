@@ -41,6 +41,10 @@ public class FacadeAgenda {
     
     public void agendarAgendamento(Cliente c, Paciente p, Veterinario v, Agendamento a) {
         
+        if (!a.verificarExpediente(a.getHorarioAgendamento())) {
+            JOptionPane.showMessageDialog(null, "Horário fora do Expediente!");
+            return;
+        }
         
         conn = Conexao.getConnection();
         OperacoesBD op = new OperacoesBD();
