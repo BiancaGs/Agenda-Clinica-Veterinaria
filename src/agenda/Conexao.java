@@ -17,8 +17,8 @@ public class Conexao {
     
     private static final String URL_MYSQL = "jdbc:mysql://localhost:3306/agenda_clinica";
     private static final String DRIVER_CLASS = "com.mysql.jdbc.Driver";
-    private static final String USER = "es1";
-    private static final String PASS = "es1123";
+    private static final String USER = "root";
+    private static final String PASS = "";
     
     // Construtor privado para que ninguém possa instanciar a classe
     private Conexao() {
