@@ -54,7 +54,7 @@ public class FacadeAgenda {
         OperacoesBD op = new OperacoesBD();              
 
 
-        // Busca se existe o veterinário
+        // Busca se existe o Veterinário
         ResultSet rsV = null;
         try {
             rsV = op.buscarVeterinario(conn, this.veterinario.getCRMV());
@@ -65,7 +65,18 @@ public class FacadeAgenda {
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Veterinario Inexistente!");
         }
-
+        
+        //Busca se existe o Paciente
+        try {
+            rsV = op.buscarPaciente(conn, this.paciente.getNomePaciente());
+            if (!rsV.next()) {
+                JOptionPane.showMessageDialog(null, "Paciente Inexistente!");    
+                return;
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Paciente Inexistente!");
+        }
+        
         // Prossegue com a Inserção
         try {
             op.inserirAgendamento(conn, this.cliente, this.paciente, this.agendamento, this.veterinario);

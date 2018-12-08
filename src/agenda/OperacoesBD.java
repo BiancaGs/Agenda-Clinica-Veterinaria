@@ -49,5 +49,18 @@ public class OperacoesBD {
         return rs;
     }
     
+    public ResultSet buscarPaciente(Connection conn, String nomePaciente) throws SQLException {
+        
+        String selectSQL = "SELECT * FROM paciente WHERE nome_paciente = ?;";
+        
+        PreparedStatement stmt = conn.prepareStatement(selectSQL);
+        stmt.setString(1, nomePaciente);
+        
+        ResultSet rs = stmt.executeQuery();
+                
+        return rs;
+    }
+    
+    
     
 }
