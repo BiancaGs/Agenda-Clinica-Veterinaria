@@ -61,6 +61,17 @@ public class OperacoesBD {
         return rs;
     }
     
+        public ResultSet buscarCliente(Connection conn, String CPFCliente) throws SQLException {
+        
+        String selectSQL = "SELECT * FROM cliente WHERE cpf_cliente = ?;";
+        
+        PreparedStatement stmt = conn.prepareStatement(selectSQL);
+        stmt.setString(1, CPFCliente);
+        
+        ResultSet rs = stmt.executeQuery();
+                
+        return rs;
+    }
     
     
 }

@@ -77,6 +77,19 @@ public class FacadeAgenda {
             JOptionPane.showMessageDialog(null, "Paciente Inexistente!");
         }
         
+        //Busca se existe o Cliente
+        try {
+            rsV = op.buscarCliente(conn, this.cliente.getCPFCliente());
+            if (!rsV.next()) {
+                JOptionPane.showMessageDialog(null, "Cliente Inexistente!");    
+                return;
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Cliente Inexistente!");
+        }
+        
+        
+        
         // Prossegue com a Inserção
         try {
             op.inserirAgendamento(conn, this.cliente, this.paciente, this.agendamento, this.veterinario);
