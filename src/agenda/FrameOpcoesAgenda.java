@@ -159,32 +159,32 @@ public class FrameOpcoesAgenda extends javax.swing.JFrame {
         // TODO add your handling code here:
         if (jRadioButtonNovoAgendamento.isSelected()) {
             new FrameNovoAgendamento().setVisible(true);
+            setVisible(false);
+            dispose();
         }
         
         else if (jRadioButtonBuscarAgendamento.isSelected()) {
-//          System.out.println("Buscar Agendamento Selecionado!");
-//          JOptionPane.showMessageDialog(null, "Buscar Agendamento Selecionado");
             new FrameBuscar().setVisible(true);
+            setVisible(false);
+            dispose();
         }
         
         else if (jRadioButtonAlterarAgendamento.isSelected()) {
-//            System.out.println("Alterar Agendamento Selecionado!");
-//            JOptionPane.showMessageDialog(null, "Alterar Agendamento Selecionado");
             new FrameAlterar().setVisible(true);
+            setVisible(false);
+            dispose();
         }
         
         else if (jRadioButtonExcluirAgendamento.isSelected()) {
-//            System.out.println("Visualizar Agendamento Selecionado!");
-//            JOptionPane.showMessageDialog(null, "Visualizar Agendamento Selecionado");
-//            new frameVisualizarAgendamentos().setVisible(true);
             new FrameExcluirAgendamento().setVisible(true);
+            setVisible(false);
+            dispose();
         }
         
         else if (jRadioButtonVisualizarAgendamentos.isSelected()) {
-//            System.out.println("Excluir Agendamento Selecionado!");
-//            JOptionPane.showMessageDialog(null, "Excluir Agendamento Selecionado");;
-//            new FrameExcluirAgendamento().setVisible(true);
             new frameVisualizarAgendamentos().setVisible(true);
+            setVisible(false);
+            dispose();
         }
     }//GEN-LAST:event_jButtonConfirmarMouseClicked
 
