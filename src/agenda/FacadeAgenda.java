@@ -42,30 +42,31 @@ public class FacadeAgenda {
     
     public void agendarAgendamento() {
         
+        // Verifica se o agendamento está no expediente da Clínica
         if (!agendamento.verificarExpediente(agendamento.getHorarioAgendamento())) {
             JOptionPane.showMessageDialog(null, "Horário fora do Expediente!");
             return;
         }
         
+
+        // Recupera a conexão
         conn = Conexao.getConnection();
         OperacoesBD op = new OperacoesBD();              
 
+
+        // Busca se existe o veterinário
         ResultSet rsV = null;
         try {
             rsV = op.buscarVeterinario(conn, this.veterinario.getCRMV());
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Veterinario nao Cadastrado!");
-        }
-                       
-        try {
             if (!rsV.next()) {
-                JOptionPane.showMessageDialog(null, "Veterinario nao Cadastrado!");    
+                JOptionPane.showMessageDialog(null, "Veterinario Inexistente!");    
                 return;
             }
         } catch (SQLException ex) {
-            Logger.getLogger(FacadeAgenda.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Veterinario Inexistente!");
         }
 
+        // Prossegue com a Inserção
         try {
             op.inserirAgendamento(conn, this.cliente, this.paciente, this.agendamento, this.veterinario);
             JOptionPane.showMessageDialog(null, "Agendamento Realizado com Sucesso!");
