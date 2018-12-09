@@ -11,8 +11,23 @@ package agenda;
  */
 public class Notificacao {
     
-    public void enviarEmail(String email) {
-        
+    public void enviarEmail() {
+        try {
+            
+            String  host        = "smtp.gmail.com";
+            String  user        = "clinicaveterinaria132@gmail.com";
+            String  senha       = "ClinicaVet123";
+            String  para        = "";
+            String  de          = "";
+            String  assunto     = "";
+            String  mensagem    = "";
+
+            boolean sessionDebug = false;
+
+
+        } catch (Exception e) {
+            //TODO: handle exception
+        }
     }
     
 }

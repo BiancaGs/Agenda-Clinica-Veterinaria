@@ -182,7 +182,7 @@ public class FrameOpcoesAgenda extends javax.swing.JFrame {
         }
         
         else if (jRadioButtonVisualizarAgendamentos.isSelected()) {
-            new frameVisualizarAgendamentos().setVisible(true);
+            new FrameVisualizarAgendamentos().setVisible(true);
             setVisible(false);
             dispose();
         }
