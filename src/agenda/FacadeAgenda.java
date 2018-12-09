@@ -118,7 +118,7 @@ public class FacadeAgenda {
             JOptionPane.showMessageDialog(null, "Cliente Inexistente!");
         }
         
-        new FrameResultadoAgendamento(c, p, v, this.agendamento).setVisible(true);
+        new FrameConfirmarAgendamento(c, p, v, this.agendamento).setVisible(true);
         
         // // Prossegue com a Inserção
         // try {

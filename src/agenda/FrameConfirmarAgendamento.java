@@ -13,7 +13,7 @@ import javax.swing.JOptionPane;
  *
  * @author pietr
  */
-public class FrameResultadoAgendamento extends javax.swing.JFrame {
+public class FrameConfirmarAgendamento extends javax.swing.JFrame {
 
     // Variáveis de instância
     private Cliente cliente;
@@ -25,12 +25,12 @@ public class FrameResultadoAgendamento extends javax.swing.JFrame {
     /**
      * Creates new form FrameResultadoAgendamento
      */
-    public FrameResultadoAgendamento() {
+    public FrameConfirmarAgendamento() {
         initComponents();
     }
 
     // Construtor sobrecarregado para receber os dados de FrameNovoAgendamento
-    public FrameResultadoAgendamento(Cliente c, Paciente p, Veterinario v, Agendamento a) {
+    public FrameConfirmarAgendamento(Cliente c, Paciente p, Veterinario v, Agendamento a) {
         initComponents();
         
         // Cliente
@@ -337,20 +337,21 @@ public class FrameResultadoAgendamento extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FrameResultadoAgendamento.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrameConfirmarAgendamento.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FrameResultadoAgendamento.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrameConfirmarAgendamento.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FrameResultadoAgendamento.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrameConfirmarAgendamento.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FrameResultadoAgendamento.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrameConfirmarAgendamento.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FrameResultadoAgendamento().setVisible(true);
+                new FrameConfirmarAgendamento().setVisible(true);
             }
         });
     }
