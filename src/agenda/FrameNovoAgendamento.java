@@ -60,7 +60,6 @@ public class FrameNovoAgendamento extends javax.swing.JFrame {
         jFormattedTextFieldCRMV = new javax.swing.JFormattedTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(400, 297));
 
         jLabel1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel1.setText("Novo Agendamento");
@@ -100,6 +99,11 @@ public class FrameNovoAgendamento extends javax.swing.JFrame {
         jButtonCancelar.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jButtonCancelar.setText("Cancelar");
         jButtonCancelar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButtonCancelar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButtonCancelarMouseClicked(evt);
+            }
+        });
 
         jButtonConfirmar.setBackground(new java.awt.Color(153, 153, 153));
         jButtonConfirmar.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
@@ -258,6 +262,13 @@ public class FrameNovoAgendamento extends javax.swing.JFrame {
     private void jFormattedTextFieldCRMVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFormattedTextFieldCRMVActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jFormattedTextFieldCRMVActionPerformed
+
+    private void jButtonCancelarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonCancelarMouseClicked
+        // TODO add your handling code here:
+        new FrameOpcoesAgenda().setVisible(true);
+        setVisible(false);
+        dispose();
+    }//GEN-LAST:event_jButtonCancelarMouseClicked
 
     /**
      * @param args the command line arguments
