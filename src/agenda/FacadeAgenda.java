@@ -53,14 +53,29 @@ public class FacadeAgenda {
         conn = Conexao.getConnection();
         OperacoesBD op = new OperacoesBD();              
 
+        ResultSet rsV = null;
+        ResultSet rsC = null;
+        ResultSet rsP = null;
+        Cliente c = new Cliente();
+        Paciente p = new Paciente();
+        Veterinario v = new Veterinario();
+
 
         // Busca se existe o Veterinário
-        ResultSet rsV = null;
         try {
             rsV = op.buscarVeterinario(conn, this.veterinario.getCRMV());
             if (!rsV.next()) {
                 JOptionPane.showMessageDialog(null, "Veterinario Inexistente!");    
                 return;
+            }
+            else {
+                // while (rsV.next()) {
+                    rsV.first();
+                    v.setNomeVeterinario(rsV.getString("nome_veterinario"));
+                    v.setCRMV(rsV.getString("CRMV_veterinario"));
+                    v.setCelularVeterinario(rsV.getString("celular_veterinario"));
+                    v.setEmailVeterinario(rsV.getString("email_veterinario"));
+                // }
             }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Veterinario Inexistente!");
@@ -68,10 +83,16 @@ public class FacadeAgenda {
         
         //Busca se existe o Paciente
         try {
-            rsV = op.buscarPaciente(conn, this.paciente.getNomePaciente());
-            if (!rsV.next()) {
+            rsP = op.buscarPaciente(conn, this.paciente.getNomePaciente());
+            if (!rsP.next()) {
                 JOptionPane.showMessageDialog(null, "Paciente Inexistente!");    
                 return;
+            }
+            else {
+                // while (rsP.next()) {
+                    rsP.first();
+                    p.setNomePaciente(rsP.getString("nome_paciente"));
+                // }
             }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Paciente Inexistente!");
@@ -79,24 +100,33 @@ public class FacadeAgenda {
         
         //Busca se existe o Cliente
         try {
-            rsV = op.buscarCliente(conn, this.cliente.getCPFCliente());
-            if (!rsV.next()) {
+            rsC = op.buscarCliente(conn, this.cliente.getCPFCliente());
+            if (!rsC.next()) {
                 JOptionPane.showMessageDialog(null, "Cliente Inexistente!");    
                 return;
+            }
+            else {
+                // while (rsC.next()) {
+                    rsC.first();
+                    c.setNomeCliente(rsC.getString("nome_cliente"));
+                    c.setCPFCliente(rsC.getString("cpf_cliente"));
+                    c.setCelularCliente(rsC.getString("celular_cliente"));
+                    c.setEmailCliente(rsC.getString("email_cliente"));
+                // }
             }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Cliente Inexistente!");
         }
         
+        new FrameResultadoAgendamento(c, p, v, this.agendamento).setVisible(true);
         
-        
-        // Prossegue com a Inserção
-        try {
-            op.inserirAgendamento(conn, this.cliente, this.paciente, this.agendamento, this.veterinario);
-            JOptionPane.showMessageDialog(null, "Agendamento Realizado com Sucesso!");
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Agendamento Não Realizado!");
-        }
+        // // Prossegue com a Inserção
+        // try {
+        //     op.inserirAgendamento(conn, this.cliente, this.paciente, this.agendamento, this.veterinario);
+        //     JOptionPane.showMessageDialog(null, "Agendamento Realizado com Sucesso!");
+        // } catch (SQLException ex) {
+        //     JOptionPane.showMessageDialog(null, "Agendamento Não Realizado!");
+        // }
     
     }
             

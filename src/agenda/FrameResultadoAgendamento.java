@@ -79,6 +79,7 @@ public class FrameResultadoAgendamento extends javax.swing.JFrame {
         jTextFieldData = new javax.swing.JTextField();
         jTextFieldHorario = new javax.swing.JTextField();
         jButtonConfirmar = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -134,12 +135,16 @@ public class FrameResultadoAgendamento extends javax.swing.JFrame {
             }
         });
 
+        jButton1.setText("Cancelar");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jButton1)
+                .addGap(18, 18, 18)
                 .addComponent(jButtonConfirmar)
                 .addGap(38, 38, 38))
             .addGroup(layout.createSequentialGroup()
@@ -257,7 +262,9 @@ public class FrameResultadoAgendamento extends javax.swing.JFrame {
                     .addComponent(jLabel15)
                     .addComponent(jTextFieldHorario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
-                .addComponent(jButtonConfirmar)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButtonConfirmar)
+                    .addComponent(jButton1))
                 .addGap(25, 25, 25))
         );
 
@@ -312,6 +319,7 @@ public class FrameResultadoAgendamento extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButtonConfirmar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
