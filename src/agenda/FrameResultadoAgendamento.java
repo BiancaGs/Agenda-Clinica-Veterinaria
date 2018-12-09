@@ -5,11 +5,22 @@
  */
 package agenda;
 
+import java.sql.Connection;
+import java.sql.SQLException;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author pietr
  */
 public class FrameResultadoAgendamento extends javax.swing.JFrame {
+
+    // Variáveis de instância
+    private Cliente cliente;
+    private Paciente paciente;
+    private Veterinario veterinario;
+    private Agendamento agendamento;
+
 
     /**
      * Creates new form FrameResultadoAgendamento
@@ -40,6 +51,12 @@ public class FrameResultadoAgendamento extends javax.swing.JFrame {
         // Agendamento
         jTextFieldData.setText(a.getDataAgendamento().toString());
         jTextFieldHorario.setText(a.getHorarioAgendamento().toString());
+
+        // Seta as classes
+        this.cliente = c;
+        this.paciente = p;
+        this.veterinario = v;
+        this.agendamento = a;        
     }
 
     /**
@@ -129,6 +146,11 @@ public class FrameResultadoAgendamento extends javax.swing.JFrame {
         });
 
         jButtonConfirmar.setText("Confirmar");
+        jButtonConfirmar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButtonConfirmarMouseClicked(evt);
+            }
+        });
         jButtonConfirmar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonConfirmarActionPerformed(evt);
@@ -282,6 +304,21 @@ public class FrameResultadoAgendamento extends javax.swing.JFrame {
     private void jTextFieldCPFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldCPFActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextFieldCPFActionPerformed
+
+    private void jButtonConfirmarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonConfirmarMouseClicked
+        // TODO add your handling code here:
+        
+        // Prossegue com a Inserção
+        OperacoesBD op = new OperacoesBD();
+        try {
+            Connection conn = Conexao.getConnection();
+            op.inserirAgendamento(conn, this.cliente, this.paciente, this.agendamento, this.veterinario);
+            JOptionPane.showMessageDialog(null, "Agendamento Realizado com Sucesso!");
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Agendamento Não Realizado!");
+        }
+
+    }//GEN-LAST:event_jButtonConfirmarMouseClicked
 
     /**
      * @param args the command line arguments
