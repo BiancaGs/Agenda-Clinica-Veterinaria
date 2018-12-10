@@ -119,6 +119,7 @@ public class FacadeAgenda {
         }
         
         new FrameConfirmarAgendamento(c, p, v, this.agendamento).setVisible(true);
+
         
         // // Prossegue com a Inserção
         // try {

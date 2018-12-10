@@ -255,6 +255,10 @@ public class FrameNovoAgendamento extends javax.swing.JFrame {
         FacadeAgenda facade = new FacadeAgenda(c, p, v, a);
         
         facade.agendarAgendamento();
+        
+        //Fecha o frame NovoAgendamento após ConfirmarAgendamento
+        setVisible(false);
+        dispose();
 
         
     }//GEN-LAST:event_jButtonConfirmarMouseClicked
