@@ -360,6 +360,21 @@ public class FrameConfirmarAgendamento extends javax.swing.JFrame {
             Connection conn = Conexao.getConnection();
             op.inserirAgendamento(conn, this.cliente, this.paciente, this.agendamento, this.veterinario);
             JOptionPane.showMessageDialog(null, "Agendamento Realizado com Sucesso!");
+            
+            // Envia a notificacao do Agendamento
+            Notificacao n = new Notificacao();
+            n.setAssunto("Aqui esta o seu agendamento!");
+            n.setEmailDestinatario("pietrozuntini@gmail.com");
+            n.setMensagem("Dados do agendamento");
+            n.enviarEmail();
+
+            JOptionPane.showMessageDialog(null, "Notificacao Enviada com Sucesso!");
+
+            // Volta para as Opcoes do Agendamento
+            new FrameOpcoesAgenda().setVisible(true);
+            setVisible(false);
+            dispose();
+
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Agendamento Não Realizado!");
         }
