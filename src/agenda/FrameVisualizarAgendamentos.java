@@ -5,7 +5,14 @@
  */
 package agenda;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.text.ParseException;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.text.MaskFormatter;
 
@@ -15,6 +22,29 @@ import javax.swing.text.MaskFormatter;
  */
 public class FrameVisualizarAgendamentos extends javax.swing.JFrame {
 
+    public class Dados {
+        private String horarioAgendamento, CPFCliente, nomeCliente, nomePaciente, CRMV, nomeVeterinario;
+        
+        public void setHorarioAgendamento(String time){
+            horarioAgendamento = time;
+        }
+        public void setCPFCliente(String CPF){
+            CPFCliente = CPF;
+        }
+        public void setNomeCliente(String nome){
+            nomeCliente = nome;
+        }
+        public void setNomePaciente(String nome){
+            nomePaciente = nome;
+        }
+        public void setCRMV(String crmv){
+            CRMV = crmv;
+        }        
+        public void setNomeVeterinario(String nome){
+            nomeVeterinario = nome;
+        }
+    }
+    
     /**
      * Creates new form frameVisualizarAgendamentos
      */
@@ -23,6 +53,37 @@ public class FrameVisualizarAgendamentos extends javax.swing.JFrame {
         formatarData();
     }
 
+    public List<Dados> listarAgendamentos(String dataAgendamento){
+        
+               
+        String visualizarSQL = "SELECT agendamento.horario_agendamento, agendamento.cpf_cliente, cliente.nome_cliente, agendamento.nome_paciente, agendamento.CRMV_veterinario, veterinario.nome_veterinario FROM agendamento JOIN veterinario ON agendamento.CRMV_veterinario = veterinario.CRMV_veterinario JOIN cliente ON agendamento.cpf_cliente = cliente.cpf_cliente WHERE agendamento.data_agendamento = ?;";
+        
+        try {
+            Connection conn = Conexao.getConnection();
+            PreparedStatement stmt = conn.prepareStatement(visualizarSQL);
+            stmt.setString(1, dataAgendamento);
+            
+            ResultSet rs = stmt.executeQuery();
+            
+            while(rs.next()){
+                
+                Dados dados = new Dados();
+                dados.setHorarioAgendamento(rs.getString("horario_agendamento"));
+                dados.setCPFCliente(rs.getString("cpf_cliente"));
+                dados.setNomeCliente(rs.getString("nome_cliente"));
+                dados.setNomePaciente(rs.getString("nome_paciente"));
+                dados.setCRMV(rs.getString("CRMV_veterinario"));
+                dados.setNomeVeterinario(rs.getString("nome_veterinario"));
+                
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(FrameVisualizarAgendamentos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
+        
+    } 
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -37,8 +98,11 @@ public class FrameVisualizarAgendamentos extends javax.swing.JFrame {
         jFormattedTextFieldData = new javax.swing.JFormattedTextField();
         jButton2 = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(775, 575));
 
         jLabel1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel1.setText("Visualizar Agendamentos");
@@ -67,6 +131,24 @@ public class FrameVisualizarAgendamentos extends javax.swing.JFrame {
         jButton1.setText("Cancelar");
         jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Horário", "CPF Cliente", "Nome Cliente", "Nome Paciente", "CRMV Veterinário", "Nome Veterinário"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, true, false, true, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(jTable1);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -77,17 +159,17 @@ public class FrameVisualizarAgendamentos extends javax.swing.JFrame {
                         .addContainerGap()
                         .addComponent(jLabel1))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(36, 36, 36)
+                        .addGap(40, 40, 40)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jFormattedTextFieldData, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 190, Short.MAX_VALUE)
-                .addComponent(jButton1)
-                .addGap(18, 18, 18)
-                .addComponent(jButton2)
-                .addGap(20, 20, 20))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jFormattedTextFieldData, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(40, 40, 40)
+                                .addComponent(jButton1)
+                                .addGap(18, 18, 18)
+                                .addComponent(jButton2))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 683, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(40, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -97,12 +179,14 @@ public class FrameVisualizarAgendamentos extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jFormattedTextFieldData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 161, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2)
-                    .addComponent(jButton1))
-                .addGap(29, 29, 29))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jFormattedTextFieldData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jButton2)
+                        .addComponent(jButton1)))
+                .addGap(30, 30, 30)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 383, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(40, Short.MAX_VALUE))
         );
 
         pack();
@@ -167,5 +251,7 @@ public class FrameVisualizarAgendamentos extends javax.swing.JFrame {
     private javax.swing.JFormattedTextField jFormattedTextFieldData;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
 }

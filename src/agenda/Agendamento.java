@@ -58,19 +58,5 @@ public class Agendamento {
         
         return false;
     }
-    
-    public Veterinario buscarVeterinario(String CRMVVeterinario){
-        
-        return null;
-    }
-   
-    public Cliente buscarCliente(String CPFCliente){
-        
-        return null;
-    }
-    
-    public Paciente buscarPaciente(String nomePaciente){
 
-        return null;
-    } 
 }
