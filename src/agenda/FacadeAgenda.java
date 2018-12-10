@@ -119,15 +119,6 @@ public class FacadeAgenda {
         }
         
         new FrameConfirmarAgendamento(c, p, v, this.agendamento).setVisible(true);
-
-        
-        // // Prossegue com a Inserção
-        // try {
-        //     op.inserirAgendamento(conn, this.cliente, this.paciente, this.agendamento, this.veterinario);
-        //     JOptionPane.showMessageDialog(null, "Agendamento Realizado com Sucesso!");
-        // } catch (SQLException ex) {
-        //     JOptionPane.showMessageDialog(null, "Agendamento Não Realizado!");
-        // }
     
     }
             
