@@ -367,7 +367,7 @@ public class FrameConfirmarAgendamento extends javax.swing.JFrame {
             String[] nome = this.cliente.getNomeCliente().split(" ", 2);
             n.setAssunto(nome[0] + " - Aqui esta o seu agendamento!");
             
-            n.setEmailDestinatario("pietrozuntini@gmail.com");
+            n.setEmailDestinatario(this.cliente.getEmailCliente());
             n.setMensagem("Dados do agendamento");
             n.enviarEmail();
 
