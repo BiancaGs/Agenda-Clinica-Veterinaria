@@ -368,7 +368,7 @@ public class FrameConfirmarAgendamento extends javax.swing.JFrame {
             n.setAssunto(nome[0] + " - Aqui esta o seu agendamento!");
             
             n.setEmailDestinatario(this.cliente.getEmailCliente());
-            n.setMensagem("Dados do agendamento");
+            n.setMensagem("Olá " + nome[0] + ", tudo bem?\n\nAbaixo estão os dados do seu agendamento:\n\nData: " + this.agendamento.getDataAgendamento().toString() + "\nHorario: " + this.agendamento.getHorarioAgendamento().toString()+ "\n\nVeterinario: " + this.veterinario.getNomeVeterinario() + "\n\nPaciente: " + this.paciente.getNomePaciente() + "\n\nAgradecemos desde ja e aguardamos por voces!\n\nClinica Veterinaria\n");
             n.enviarEmail();
 
             JOptionPane.showMessageDialog(null, "Notificacao Enviada com Sucesso!");
