@@ -368,7 +368,20 @@ public class FrameConfirmarAgendamento extends javax.swing.JFrame {
             n.setAssunto(nome[0] + " - Aqui esta o seu agendamento!");
             
             n.setEmailDestinatario(this.cliente.getEmailCliente());
-            n.setMensagem("Olá " + nome[0] + ", tudo bem?\n\nAbaixo estão os dados do seu agendamento:\n\nData: " + this.agendamento.getDataAgendamento().toString() + "\nHorario: " + this.agendamento.getHorarioAgendamento().toString()+ "\n\nVeterinario: " + this.veterinario.getNomeVeterinario() + "\n\nPaciente: " + this.paciente.getNomePaciente() + "\n\nAgradecemos desde ja e aguardamos por voces!\n\nClinica Veterinaria\n");
+
+            StringBuilder mensagem = new StringBuilder("");
+            String newline =System.getProperty("line.separator");
+            mensagem.append("Olá " + nome[0] + ", tudo bem?\n\n");
+            mensagem.append("Abaixo estão os dados do seu agendamento:\n\n");
+            mensagem.append("Data: " + this.agendamento.getDataAgendamento().toString() + "\n");
+            mensagem.append("Horário: " + this.agendamento.getHorarioAgendamento().toString() + "\n\n");
+            mensagem.append("Veterinário: " + this.veterinario.getNomeVeterinario() + "\n\n");
+            mensagem.append("Paciente: " + this.paciente.getNomePaciente() + "\n\n");
+            mensagem.append("Agradecemos desde já e aguardamos por vocês!\n\n");
+            mensagem.append("Clínica Veterinária\n");
+
+            n.setMensagem(mensagem.toString());
+
             n.enviarEmail();
 
             JOptionPane.showMessageDialog(null, "Notificacao Enviada com Sucesso!");
