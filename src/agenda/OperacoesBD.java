@@ -9,6 +9,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -90,6 +92,21 @@ public class OperacoesBD {
 
         return false;
 
+    }
+
+    public void removerAgendamento(Connection conn, Agendamento a, String CPFCliente) throws SQLException {
+
+        String deleteSQL = "DELETE FROM agendamento WHERE data_agendamento = ? AND horario_agendamento = ? AND cpf_cliente = ?;";
+
+        PreparedStatement stmt;
+        stmt = conn.prepareStatement(deleteSQL);
+        stmt.setString(1, a.getDataAgendamento().toString());
+        stmt.setString(2, a.getHorarioAgendamento().toString());
+        stmt.setString(3, CPFCliente);
+
+        stmt.execute();
+        stmt.close();
+        
     }
     
 }

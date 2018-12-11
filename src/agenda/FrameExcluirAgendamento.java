@@ -180,7 +180,7 @@ public class FrameExcluirAgendamento extends javax.swing.JFrame {
         
         String dataAgendamento = jFormattedTextFieldData.getText();
         String horarioAgendamento = jFormattedTextFieldHorario.getText();
-        String CPFCLiente = jFormattedTextFieldCPFCliente.getText();
+        String CPFCliente = jFormattedTextFieldCPFCliente.getText();
 
         
         // Formata a data para o MySQL
@@ -197,31 +197,24 @@ public class FrameExcluirAgendamento extends javax.swing.JFrame {
         }
         Time horarioFormatado = new Time(dataHorario.getTime());
 
+        Agendamento a = new Agendamento(dataFormatada, horarioFormatado);
 
-
-        String deleteSQL = "DELETE FROM agendamento WHERE data_agendamento = ? AND horario_agendamento = ? AND cpf_cliente = ?;";
         
-        Connection conn = Conexao.getConnection();
+        
+        OperacoesBD op = new OperacoesBD();
         try {
-            PreparedStatement stmt = conn.prepareStatement(deleteSQL);
-            stmt.setString(1, dataFormatada.toString());
-            stmt.setString(2, horarioFormatado.toString());
-            stmt.setString(3, CPFCLiente);
+            Connection conn = Conexao.getConnection();
+            op.removerAgendamento(conn, a, CPFCliente);
             
-            stmt.execute();
-            stmt.close();
-            
-            JOptionPane.showMessageDialog(null, "Agendamento Excluído com Sucesso!");
-            
+            JOptionPane.showMessageDialog(null, "Agendamento Excluído com Sucesso!");            
+
             new FrameOpcoesAgenda().setVisible(true);
             setVisible(false);
             dispose();
-            
+
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Falha na Exclusão do Agendamento!");
         }
-        
-
 
         
     }//GEN-LAST:event_jButtonExcluirMouseClicked
