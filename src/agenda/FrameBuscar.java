@@ -36,16 +36,12 @@ public class FrameBuscar extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        jButtonConfirmar = new javax.swing.JButton();
         jButtonCancelar = new javax.swing.JButton();
         jFormattedTextFieldCPFCliente1 = new javax.swing.JFormattedTextField();
-        jLabel3 = new javax.swing.JLabel();
-        jFormattedTextFieldData = new javax.swing.JFormattedTextField();
-        jLabel4 = new javax.swing.JLabel();
-        jFormattedTextFieldHorario = new javax.swing.JFormattedTextField();
-        jLabel5 = new javax.swing.JLabel();
-        jTextFieldPaciente = new javax.swing.JTextField();
         jButtonBuscarCPF = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        jLabel3 = new javax.swing.JLabel();
 
         jFormattedTextFieldCPFCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -62,19 +58,9 @@ public class FrameBuscar extends javax.swing.JFrame {
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel6.setText("CPF Cliente:");
 
-        jButtonConfirmar.setBackground(new java.awt.Color(153, 153, 153));
-        jButtonConfirmar.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jButtonConfirmar.setText("Confirmar");
-        jButtonConfirmar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButtonConfirmar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonConfirmarActionPerformed(evt);
-            }
-        });
-
         jButtonCancelar.setBackground(new java.awt.Color(153, 153, 153));
         jButtonCancelar.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jButtonCancelar.setText("Cancelar");
+        jButtonCancelar.setText("Voltar");
         jButtonCancelar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButtonCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -88,26 +74,41 @@ public class FrameBuscar extends javax.swing.JFrame {
             }
         });
 
-        jLabel3.setText("Data:");
-
-        jLabel4.setText("Horário:");
-
-        jFormattedTextFieldHorario.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jFormattedTextFieldHorarioActionPerformed(evt);
-            }
-        });
-
-        jLabel5.setText("Nome Paciente:");
-
         jButtonBuscarCPF.setBackground(new java.awt.Color(153, 153, 153));
         jButtonBuscarCPF.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jButtonBuscarCPF.setText("Buscar");
+        jButtonBuscarCPF.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButtonBuscarCPFMouseClicked(evt);
+            }
+        });
         jButtonBuscarCPF.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonBuscarCPFActionPerformed(evt);
             }
         });
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Data", "Horário", "Paciente", "Veterinário"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(jTable1);
+        if (jTable1.getColumnModel().getColumnCount() > 0) {
+            jTable1.getColumnModel().getColumn(0).setPreferredWidth(100);
+            jTable1.getColumnModel().getColumn(1).setPreferredWidth(100);
+        }
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -117,29 +118,22 @@ public class FrameBuscar extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel1)
                 .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addGap(40, 40, 40)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel5)
-                    .addComponent(jLabel3)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jLabel4)
-                        .addComponent(jFormattedTextFieldHorario)
-                        .addComponent(jFormattedTextFieldData, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 678, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jFormattedTextFieldCPFCliente1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel2))
-                    .addComponent(jTextFieldPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButtonBuscarCPF, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButtonCancelar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButtonConfirmar)))
-                .addGap(20, 20, 20))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
+                            .addComponent(jFormattedTextFieldCPFCliente1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE))
+                        .addGap(0, 0, 0)
+                        .addComponent(jLabel2)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButtonBuscarCPF, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(12, 12, 12)
+                        .addComponent(jButtonCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(40, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -156,24 +150,13 @@ public class FrameBuscar extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jFormattedTextFieldCPFCliente1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButtonBuscarCPF))))
-                .addGap(10, 10, 10)
-                .addComponent(jLabel5)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextFieldPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(10, 10, 10)
-                .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jFormattedTextFieldData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(10, 10, 10)
-                .addComponent(jLabel4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jFormattedTextFieldHorario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButtonConfirmar)
-                    .addComponent(jButtonCancelar))
-                .addGap(30, 30, 30))
+                            .addComponent(jButtonBuscarCPF)
+                            .addComponent(jButtonCancelar))))
+                .addGap(18, 18, 18)
+                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(40, Short.MAX_VALUE))
         );
 
         pack();
@@ -183,17 +166,9 @@ public class FrameBuscar extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jFormattedTextFieldCPFClienteActionPerformed
 
-    private void jButtonConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConfirmarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButtonConfirmarActionPerformed
-
     private void jFormattedTextFieldCPFCliente1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFormattedTextFieldCPFCliente1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jFormattedTextFieldCPFCliente1ActionPerformed
-
-    private void jFormattedTextFieldHorarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFormattedTextFieldHorarioActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jFormattedTextFieldHorarioActionPerformed
 
     private void jButtonBuscarCPFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBuscarCPFActionPerformed
         // TODO add your handling code here:
@@ -202,6 +177,10 @@ public class FrameBuscar extends javax.swing.JFrame {
     private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButtonCancelarActionPerformed
+
+    private void jButtonBuscarCPFMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonBuscarCPFMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonBuscarCPFMouseClicked
 
     /**
      * @param args the command line arguments
@@ -251,17 +230,13 @@ public class FrameBuscar extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonBuscarCPF;
     private javax.swing.JButton jButtonCancelar;
-    private javax.swing.JButton jButtonConfirmar;
     private javax.swing.JFormattedTextField jFormattedTextFieldCPFCliente;
     private javax.swing.JFormattedTextField jFormattedTextFieldCPFCliente1;
-    private javax.swing.JFormattedTextField jFormattedTextFieldData;
-    private javax.swing.JFormattedTextField jFormattedTextFieldHorario;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JTextField jTextFieldPaciente;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
 }
