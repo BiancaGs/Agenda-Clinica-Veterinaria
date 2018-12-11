@@ -133,7 +133,7 @@ public class FrameBuscar extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        jButtonCancelar = new javax.swing.JButton();
+        jButtonVoltar = new javax.swing.JButton();
         jFormattedTextFieldCPFCliente1 = new javax.swing.JFormattedTextField();
         jButtonBuscarCPF = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -147,7 +147,6 @@ public class FrameBuscar extends javax.swing.JFrame {
         });
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(780, 450));
 
         jLabel1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel1.setText("Buscar Agendamento");
@@ -155,13 +154,18 @@ public class FrameBuscar extends javax.swing.JFrame {
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel6.setText("CPF Cliente:");
 
-        jButtonCancelar.setBackground(new java.awt.Color(153, 153, 153));
-        jButtonCancelar.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jButtonCancelar.setText("Voltar");
-        jButtonCancelar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButtonCancelar.addActionListener(new java.awt.event.ActionListener() {
+        jButtonVoltar.setBackground(new java.awt.Color(153, 153, 153));
+        jButtonVoltar.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jButtonVoltar.setText("Voltar");
+        jButtonVoltar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButtonVoltar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButtonVoltarMouseClicked(evt);
+            }
+        });
+        jButtonVoltar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonCancelarActionPerformed(evt);
+                jButtonVoltarActionPerformed(evt);
             }
         });
 
@@ -229,7 +233,7 @@ public class FrameBuscar extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(jButtonBuscarCPF, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(12, 12, 12)
-                        .addComponent(jButtonCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jButtonVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(40, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -248,7 +252,7 @@ public class FrameBuscar extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jFormattedTextFieldCPFCliente1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jButtonBuscarCPF)
-                            .addComponent(jButtonCancelar))))
+                            .addComponent(jButtonVoltar))))
                 .addGap(18, 18, 18)
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -271,15 +275,21 @@ public class FrameBuscar extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButtonBuscarCPFActionPerformed
 
-    private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
+    private void jButtonVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonVoltarActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButtonCancelarActionPerformed
+    }//GEN-LAST:event_jButtonVoltarActionPerformed
 
     private void jButtonBuscarCPFMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonBuscarCPFMouseClicked
         String CPF = jFormattedTextFieldCPFCliente1.getText();
         
         mostrarAgendamentos(CPF);
     }//GEN-LAST:event_jButtonBuscarCPFMouseClicked
+
+    private void jButtonVoltarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonVoltarMouseClicked
+        new FrameOpcoesAgenda().setVisible(true);
+        setVisible(false);
+        dispose();
+    }//GEN-LAST:event_jButtonVoltarMouseClicked
 
     /**
      * @param args the command line arguments
@@ -328,7 +338,7 @@ public class FrameBuscar extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonBuscarCPF;
-    private javax.swing.JButton jButtonCancelar;
+    private javax.swing.JButton jButtonVoltar;
     private javax.swing.JFormattedTextField jFormattedTextFieldCPFCliente;
     private javax.swing.JFormattedTextField jFormattedTextFieldCPFCliente1;
     private javax.swing.JLabel jLabel1;
