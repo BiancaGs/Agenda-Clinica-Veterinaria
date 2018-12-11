@@ -64,6 +64,11 @@ public class FrameOpcoesAgenda extends javax.swing.JFrame {
         jButtonCancelar.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jButtonCancelar.setText("Cancelar");
         jButtonCancelar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButtonCancelar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButtonCancelarMouseClicked(evt);
+            }
+        });
         jButtonCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonCancelarActionPerformed(evt);
@@ -191,6 +196,11 @@ public class FrameOpcoesAgenda extends javax.swing.JFrame {
     private void jRadioButtonAlterarAgendamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonAlterarAgendamentoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jRadioButtonAlterarAgendamentoActionPerformed
+
+    private void jButtonCancelarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonCancelarMouseClicked
+        setVisible(false);
+        dispose();
+    }//GEN-LAST:event_jButtonCancelarMouseClicked
 
     /**
      * @param args the command line arguments

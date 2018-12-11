@@ -228,6 +228,11 @@ public class FrameAlterar extends javax.swing.JFrame {
         jButtonVoltar.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jButtonVoltar.setText("Voltar");
         jButtonVoltar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButtonVoltar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButtonVoltarMouseClicked(evt);
+            }
+        });
 
         jLabel4.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabel4.setText("CPF Cliente: ");
@@ -436,6 +441,12 @@ public class FrameAlterar extends javax.swing.JFrame {
 
 
     }//GEN-LAST:event_jButtonAtualizarMouseClicked
+
+    private void jButtonVoltarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonVoltarMouseClicked
+        new FrameOpcoesAgenda().setVisible(true);
+        setVisible(false);
+        dispose();
+    }//GEN-LAST:event_jButtonVoltarMouseClicked
 
     /**
      * @param args the command line arguments
