@@ -158,7 +158,6 @@ public class FrameVisualizarAgendamentos extends javax.swing.JFrame {
         jTable = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(775, 575));
 
         jLabel1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel1.setText("Visualizar Agendamentos");
@@ -214,6 +213,13 @@ public class FrameVisualizarAgendamentos extends javax.swing.JFrame {
             }
         });
         jScrollPane1.setViewportView(jTable);
+        if (jTable.getColumnModel().getColumnCount() > 0) {
+            jTable.getColumnModel().getColumn(1).setPreferredWidth(150);
+            jTable.getColumnModel().getColumn(2).setPreferredWidth(175);
+            jTable.getColumnModel().getColumn(3).setPreferredWidth(110);
+            jTable.getColumnModel().getColumn(4).setPreferredWidth(125);
+            jTable.getColumnModel().getColumn(5).setPreferredWidth(175);
+        }
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -230,10 +236,10 @@ public class FrameVisualizarAgendamentos extends javax.swing.JFrame {
                             .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jFormattedTextFieldData, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(40, 40, 40)
-                                .addComponent(jButtonCancelar)
                                 .addGap(18, 18, 18)
-                                .addComponent(jButtonConfirmar))
+                                .addComponent(jButtonConfirmar)
+                                .addGap(18, 18, 18)
+                                .addComponent(jButtonCancelar))
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 683, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(40, Short.MAX_VALUE))
         );
@@ -242,17 +248,16 @@ public class FrameVisualizarAgendamentos extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addGap(18, 18, 18)
+                .addGap(10, 10, 10)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jFormattedTextFieldData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jButtonConfirmar)
-                        .addComponent(jButtonCancelar)))
-                .addGap(30, 30, 30)
+                    .addComponent(jButtonConfirmar)
+                    .addComponent(jButtonCancelar))
+                .addGap(32, 32, 32)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 383, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(40, Short.MAX_VALUE))
+                .addContainerGap(46, Short.MAX_VALUE))
         );
 
         pack();
