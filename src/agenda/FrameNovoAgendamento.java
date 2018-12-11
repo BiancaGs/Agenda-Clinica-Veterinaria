@@ -217,7 +217,7 @@ public class FrameNovoAgendamento extends javax.swing.JFrame {
     }//GEN-LAST:event_jFormattedTextFieldHorarioActionPerformed
 
     private void jButtonConfirmarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonConfirmarMouseClicked
-        // TODO add your handling code here:
+        
         String data = jFormattedTextFieldData.getText();
         String horario = jFormattedTextFieldHorario.getText();
         String CRMVVeterinario = jFormattedTextFieldCRMV.getText();
@@ -233,24 +233,12 @@ public class FrameNovoAgendamento extends javax.swing.JFrame {
         
         Paciente p = new Paciente();
         p.setNomePaciente(nomePaciente);
-        
-        
-        // Formata a data para o MySQL
-        DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        LocalDate dataFormatada = LocalDate.parse(data, formato);
-  
-        // Formata o horário para o MySQL
-        SimpleDateFormat formatoH = new SimpleDateFormat("HH:mm");;
-        Date dataHorario = new Date();
-        try {
-            dataHorario = formatoH.parse(horario);
-        } catch (ParseException ex) {
-            Logger.getLogger(FrameNovoAgendamento.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        Time horarioFormatado = new Time(dataHorario.getTime());
-        
-        Agendamento a = new Agendamento(dataFormatada, horarioFormatado);
-        
+
+
+        Agendamento a = new Agendamento();
+        a.setDataAgendamento(a.toLocalDate(data));
+        a.setHorarioAgendamento(a.toTime(horario));
+
         
         FacadeAgenda facade = new FacadeAgenda();
         facade.setCliente(c);

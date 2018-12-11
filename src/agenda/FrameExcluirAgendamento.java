@@ -182,23 +182,10 @@ public class FrameExcluirAgendamento extends javax.swing.JFrame {
         String horarioAgendamento = jFormattedTextFieldHorario.getText();
         String CPFCliente = jFormattedTextFieldCPFCliente.getText();
 
-        
-        // Formata a data para o MySQL
-        DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        LocalDate dataFormatada = LocalDate.parse(dataAgendamento, formato);
-  
-        // Formata o horário para o MySQL
-        SimpleDateFormat formatoH = new SimpleDateFormat("HH:mm");;
-        Date dataHorario = new Date();
-        try {
-            dataHorario = formatoH.parse(horarioAgendamento);
-        } catch (ParseException ex) {
-            Logger.getLogger(FrameNovoAgendamento.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        Time horarioFormatado = new Time(dataHorario.getTime());
 
-        Agendamento a = new Agendamento(dataFormatada, horarioFormatado);
-
+        Agendamento a = new Agendamento();
+        a.setDataAgendamento(a.toLocalDate(dataAgendamento));
+        a.setHorarioAgendamento(a.toTime(horarioAgendamento));
         
         
         OperacoesBD op = new OperacoesBD();
