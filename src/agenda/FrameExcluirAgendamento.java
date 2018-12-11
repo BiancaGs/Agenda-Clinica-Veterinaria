@@ -5,7 +5,17 @@
  */
 package agenda;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.sql.Time;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.text.MaskFormatter;
 
@@ -161,11 +171,59 @@ public class FrameExcluirAgendamento extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonExcluirActionPerformed
 
     private void jButtonVoltarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonVoltarMouseClicked
-        // TODO add your handling code here:
+        new FrameOpcoesAgenda().setVisible(true);
+        setVisible(false);
+        dispose();
     }//GEN-LAST:event_jButtonVoltarMouseClicked
 
     private void jButtonExcluirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonExcluirMouseClicked
-        // TODO add your handling code here:
+        
+        String dataAgendamento = jFormattedTextFieldData.getText();
+        String horarioAgendamento = jFormattedTextFieldHorario.getText();
+        String CPFCLiente = jFormattedTextFieldCPFCliente.getText();
+
+        
+        // Formata a data para o MySQL
+        DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        LocalDate dataFormatada = LocalDate.parse(dataAgendamento, formato);
+  
+        // Formata o horário para o MySQL
+        SimpleDateFormat formatoH = new SimpleDateFormat("HH:mm");;
+        Date dataHorario = new Date();
+        try {
+            dataHorario = formatoH.parse(horarioAgendamento);
+        } catch (ParseException ex) {
+            Logger.getLogger(FrameNovoAgendamento.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        Time horarioFormatado = new Time(dataHorario.getTime());
+
+
+
+        String deleteSQL = "DELETE FROM agendamento WHERE data_agendamento = ? AND horario_agendamento = ? AND cpf_cliente = ?;";
+        
+        Connection conn = Conexao.getConnection();
+        try {
+            PreparedStatement stmt = conn.prepareStatement(deleteSQL);
+            stmt.setString(1, dataFormatada.toString());
+            stmt.setString(2, horarioFormatado.toString());
+            stmt.setString(3, CPFCLiente);
+            
+            stmt.execute();
+            stmt.close();
+            
+            JOptionPane.showMessageDialog(null, "Agendamento Excluído com Sucesso!");
+            
+            new FrameOpcoesAgenda().setVisible(true);
+            setVisible(false);
+            dispose();
+            
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Falha na Exclusão do Agendamento!");
+        }
+        
+
+
+        
     }//GEN-LAST:event_jButtonExcluirMouseClicked
 
     private void jFormattedTextFieldCPFClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFormattedTextFieldCPFClienteActionPerformed
