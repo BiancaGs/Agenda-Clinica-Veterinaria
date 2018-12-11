@@ -85,13 +85,11 @@ public class FacadeAgenda {
                 return;
             }
             else {
-                // while (rsV.next()) {
-                    rsV.first();
-                    v.setNomeVeterinario(rsV.getString("nome_veterinario"));
-                    v.setCRMV(rsV.getString("CRMV_veterinario"));
-                    v.setCelularVeterinario(rsV.getString("celular_veterinario"));
-                    v.setEmailVeterinario(rsV.getString("email_veterinario"));
-                // }
+                rsV.first();
+                v.setNomeVeterinario(rsV.getString("nome_veterinario"));
+                v.setCRMV(rsV.getString("CRMV_veterinario"));
+                v.setCelularVeterinario(rsV.getString("celular_veterinario"));
+                v.setEmailVeterinario(rsV.getString("email_veterinario"));
             }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Veterinario Inexistente!");
@@ -105,10 +103,8 @@ public class FacadeAgenda {
                 return;
             }
             else {
-                // while (rsP.next()) {
-                    rsP.first();
-                    p.setNomePaciente(rsP.getString("nome_paciente"));
-                // }
+                rsP.first();
+                p.setNomePaciente(rsP.getString("nome_paciente"));
             }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Paciente Inexistente!");
@@ -122,13 +118,11 @@ public class FacadeAgenda {
                 return;
             }
             else {
-                // while (rsC.next()) {
-                    rsC.first();
-                    c.setNomeCliente(rsC.getString("nome_cliente"));
-                    c.setCPFCliente(rsC.getString("cpf_cliente"));
-                    c.setCelularCliente(rsC.getString("celular_cliente"));
-                    c.setEmailCliente(rsC.getString("email_cliente"));
-                // }
+                rsC.first();
+                c.setNomeCliente(rsC.getString("nome_cliente"));
+                c.setCPFCliente(rsC.getString("cpf_cliente"));
+                c.setCelularCliente(rsC.getString("celular_cliente"));
+                c.setEmailCliente(rsC.getString("email_cliente"));
             }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Cliente Inexistente!");
