@@ -25,24 +25,44 @@ public class FrameVisualizarAgendamentos extends javax.swing.JFrame {
     public class Dados {
         private String horarioAgendamento, CPFCliente, nomeCliente, nomePaciente, CRMV, nomeVeterinario;
         
-        public void setHorarioAgendamento(String time){
+        public void setHorarioAgendamento(String time) {
             horarioAgendamento = time;
         }
-        public void setCPFCliente(String CPF){
+        public void setCPFCliente(String CPF) {
             CPFCliente = CPF;
         }
-        public void setNomeCliente(String nome){
+        public void setNomeCliente(String nome) {
             nomeCliente = nome;
         }
-        public void setNomePaciente(String nome){
+        public void setNomePaciente(String nome) {
             nomePaciente = nome;
         }
-        public void setCRMV(String crmv){
+        public void setCRMV(String crmv) {
             CRMV = crmv;
         }        
-        public void setNomeVeterinario(String nome){
+        public void setNomeVeterinario(String nome) {
             nomeVeterinario = nome;
         }
+        
+        public String getHorarioAgendamento() {
+            return this.horarioAgendamento;
+        }
+        public String getCPFCliente() {
+            return this.CPFCliente;
+        }
+        public String getNomeCliente() {
+            return this.nomeCliente;
+        }
+        public String getNomePaciente() {
+            return this.nomePaciente;
+        }
+        public String getCRMV() {
+            return this.CRMV;
+        }
+        public String getNomeVeterinario() {
+            return this.nomeVeterinario;
+        }
+
     }
     
     /**
