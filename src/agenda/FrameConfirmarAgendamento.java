@@ -52,6 +52,19 @@ public class FrameConfirmarAgendamento extends javax.swing.JFrame {
         jTextFieldData.setText(a.getDataAgendamento().toString());
         jTextFieldHorario.setText(a.getHorarioAgendamento().toString());
 
+        // Tira a permissao de edicao de dados
+        jTextFieldNomeCli.setEditable(false);
+        jTextFieldCPF.setEditable(false);
+        jTextFieldCelularCli.setEditable(false);
+        jTextFieldEmailCli.setEditable(false);
+        jTextFieldNomePaciente.setEditable(false);
+        jTextFieldNomeVet.setEditable(false);
+        jTextFieldCRMV.setEditable(false);
+        jTextFieldCelularVet.setEditable(false);
+        jTextFieldEmailVet.setEditable(false);
+        jTextFieldData.setEditable(false);
+        jTextFieldHorario.setEditable(false);
+
         // Seta as classes
         this.cliente = c;
         this.paciente = p;
