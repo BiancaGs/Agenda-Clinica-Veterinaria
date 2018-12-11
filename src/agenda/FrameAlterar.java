@@ -9,9 +9,17 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Time;
+import java.text.DateFormat;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
@@ -23,13 +31,19 @@ import javax.swing.text.MaskFormatter;
  */
 public class FrameAlterar extends javax.swing.JFrame {
 
+    private Agendamento agendamentoAntigo = null;
+    private Paciente paciente = null;
+    private Veterinario veterinario = null;
+
+
+
     /**
      * Creates new form FrameAlterar
      */
     public FrameAlterar() {
         initComponents();
-        //formatarData();
-        //formatarHorario();
+        formatarData();
+        formatarHorario();
         formatarCPF();
     }
 
@@ -244,6 +258,11 @@ public class FrameAlterar extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jTableAgendamentos);
 
         jButtonAtualizar.setText("Atualizar");
+        jButtonAtualizar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButtonAtualizarMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -344,11 +363,92 @@ public class FrameAlterar extends javax.swing.JFrame {
         int posicao = jTableAgendamentos.getSelectedRow();
         TableModel modelo = jTableAgendamentos.getModel();
 
-        jFormattedTextFieldData.setText(modelo.getValueAt(posicao, 0).toString());
-        jFormattedTextFieldHorario.setText(modelo.getValueAt(posicao, 1).toString());
+        String dataAgendamentoTabela = modelo.getValueAt(posicao, 0).toString();
+        String horarioAgendamentoTabela = modelo.getValueAt(posicao, 1).toString();
+        String nomePacienteTabela = modelo.getValueAt(posicao, 2).toString();
+        String CRMVTabela = modelo.getValueAt(posicao, 3).toString();
+
         
+        // Formata a data
+        DateTimeFormatter formatoUS = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate date = LocalDate.parse(dataAgendamentoTabela, formatoUS);
         
+        DateTimeFormatter formatoBR = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        String dataFormatada = formatoBR.format(date);
+
+
+        // Converte o horário
+        SimpleDateFormat formatoH = new SimpleDateFormat("HH:mm:ss");
+        Date dataHorario = new Date();
+        try {
+            dataHorario = formatoH.parse(horarioAgendamentoTabela);
+        } catch (ParseException ex) {
+            JOptionPane.showMessageDialog(null, ex);
+        }
+        Time horarioFormatado = new Time(dataHorario.getTime());
+        
+
+        this.agendamentoAntigo = new Agendamento(date, horarioFormatado);
+        
+        this.paciente = new Paciente();
+        this.paciente.setNomePaciente(nomePacienteTabela);
+
+        this.veterinario = new Veterinario();
+        this.veterinario.setCRMV(CRMVTabela);
+
+        
+
+        jFormattedTextFieldData.setText(dataFormatada);
+        jFormattedTextFieldHorario.setText(horarioFormatado.toString());
+        
+
     }//GEN-LAST:event_jTableAgendamentosMouseClicked
+
+    private void jButtonAtualizarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonAtualizarMouseClicked
+
+        
+        Agendamento agendamentoNovo = new Agendamento();
+        agendamentoNovo.setDataAgendamento(agendamentoNovo.toLocalDate(jFormattedTextFieldData.getText()));
+        agendamentoNovo.setHorarioAgendamento(agendamentoNovo.toTime(jFormattedTextFieldHorario.getText()));
+
+
+        Cliente cliente = new Cliente();
+        cliente.setCPFCliente(jFormattedTextFieldCPFCliente.getText());
+
+        
+
+        OperacoesBD op = new OperacoesBD();
+        try {
+            Connection conn = Conexao.getConnection();
+
+            System.out.println("Agendamento Antigo:");
+            System.out.println(this.agendamentoAntigo.getDataAgendamento().toString());
+            System.out.println(this.agendamentoAntigo.getHorarioAgendamento().toString());
+            System.out.println("Agendamento Novo:");
+            System.out.println(agendamentoNovo.getDataAgendamento().toString());
+            System.out.println(agendamentoNovo.getHorarioAgendamento().toString());
+            System.out.println("Paciente:");
+            System.out.println(this.paciente.getNomePaciente());
+            System.out.println("Cliente:");
+            System.out.println(cliente.getCPFCliente());
+            System.out.println("Veterinario:");
+            System.out.println(this.veterinario.getCRMV());
+
+
+            op.atualizarAgendamento(conn, this.agendamentoAntigo, agendamentoNovo, cliente, this.veterinario, this.paciente);
+            
+            JOptionPane.showMessageDialog(null, "Agendamento Alterado com Sucesso!");            
+
+            new FrameOpcoesAgenda().setVisible(true);
+            setVisible(false);
+            dispose();
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Falha na Alteração do Agendamento!");
+        }
+
+
+    }//GEN-LAST:event_jButtonAtualizarMouseClicked
 
     /**
      * @param args the command line arguments
@@ -396,7 +496,7 @@ public class FrameAlterar extends javax.swing.JFrame {
     
     private void formatarHorario() {
         try {
-            MaskFormatter mask = new MaskFormatter("##:##");
+            MaskFormatter mask = new MaskFormatter("##:##:##");
             mask.install(jFormattedTextFieldHorario);
         } catch (ParseException ex) {
             JOptionPane.showMessageDialog(null, "Erro ao formatar campo HORARIO");

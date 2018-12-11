@@ -108,5 +108,25 @@ public class OperacoesBD {
         stmt.close();
         
     }
+
+    public void atualizarAgendamento(Connection conn, Agendamento antigo, Agendamento novo, Cliente c, Veterinario v, Paciente p) throws SQLException {
+
+        String updateSQL = "UPDATE agendamento SET dada_agendamento = ?, horario_agendamento = ? WHERE data_agendamento = ? AND horario_agendamento = ? AND cpf_cliente = ? AND nome_paciente = ? AND CRMV_veterinario = ?;";
+
+        PreparedStatement stmt = conn.prepareStatement(updateSQL);
+        stmt.setString(1, novo.getDataAgendamento().toString());
+        stmt.setString(2, novo.getHorarioAgendamento().toString());
+        stmt.setString(3, antigo.getDataAgendamento().toString());
+        stmt.setString(4, antigo.getHorarioAgendamento().toString());
+        stmt.setString(5, c.getCPFCliente());
+        stmt.setString(6, p.getNomePaciente());
+        stmt.setString(7, v.getCRMV());
+
+        stmt.execute();
+        stmt.close();
+
+
+
+    }
     
 }
