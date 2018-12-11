@@ -45,12 +45,12 @@ public class FacadeAgenda {
         new FrameOpcoesAgenda().setVisible(true);
     }
     
-    public void agendarAgendamento() {
+    public boolean agendarAgendamento() {
         
         // Verifica se o agendamento está no expediente da Clínica
         if (!agendamento.verificarExpediente(agendamento.getHorarioAgendamento())) {
             JOptionPane.showMessageDialog(null, "Horário fora do Expediente!");
-            return;
+            return false;
         }
 
         
@@ -63,7 +63,7 @@ public class FacadeAgenda {
         try {
             if (!op.verificarDisponibilidade(conn, this.agendamento.getDataAgendamento().toString(), this.agendamento.getHorarioAgendamento().toString(), this.veterinario.getCRMV())) {
                 JOptionPane.showMessageDialog(null, "Horário Indisponivel nos Agendamentos do Veterinario!");
-                return;
+                return false;
             }
         } catch (SQLException ex) {
             Logger.getLogger(FacadeAgenda.class.getName()).log(Level.SEVERE, null, ex);
@@ -82,7 +82,7 @@ public class FacadeAgenda {
             rsV = op.buscarVeterinario(conn, this.veterinario.getCRMV());
             if (!rsV.next()) {
                 JOptionPane.showMessageDialog(null, "Veterinario Inexistente!");    
-                return;
+                return false;
             }
             else {
                 rsV.first();
@@ -100,7 +100,7 @@ public class FacadeAgenda {
             rsP = op.buscarPaciente(conn, this.paciente.getNomePaciente());
             if (!rsP.next()) {
                 JOptionPane.showMessageDialog(null, "Paciente Inexistente!");    
-                return;
+                return false;
             }
             else {
                 rsP.first();
@@ -115,7 +115,7 @@ public class FacadeAgenda {
             rsC = op.buscarCliente(conn, this.cliente.getCPFCliente());
             if (!rsC.next()) {
                 JOptionPane.showMessageDialog(null, "Cliente Inexistente!");    
-                return;
+                return false;
             }
             else {
                 rsC.first();
@@ -129,6 +129,7 @@ public class FacadeAgenda {
         }
         
         new FrameConfirmarAgendamento(c, p, v, this.agendamento).setVisible(true);
+        return true;
     
     }
             

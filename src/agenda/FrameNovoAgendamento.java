@@ -258,12 +258,12 @@ public class FrameNovoAgendamento extends javax.swing.JFrame {
         facade.setVeterinario(v);
         facade.setAgendamento(a);
         
-        // Realiza o agendamento
-        facade.agendarAgendamento();
+        // Realiza o agendamento && Fecha o frame NovoAgendamento após ConfirmarAgendamento 
+        if (facade.agendarAgendamento()) {
+            setVisible(false);
+            dispose();
+        }
         
-        //Fecha o frame NovoAgendamento após ConfirmarAgendamento
-        setVisible(false);
-        dispose();
 
         
     }//GEN-LAST:event_jButtonConfirmarMouseClicked
