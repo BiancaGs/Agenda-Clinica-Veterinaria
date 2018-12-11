@@ -5,8 +5,15 @@
  */
 package agenda;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.text.MaskFormatter;
 
 /**
@@ -24,6 +31,116 @@ public class FrameAlterar extends javax.swing.JFrame {
         formatarHorario();
         formatarCPF();
     }
+
+    public class DadosAlterar {
+        private String dataAgendamento, horarioAgendamento, CPFCliente, nomeCliente, nomePaciente, CRMV, nomeVeterinario;
+        
+        public void setDataAgendamento(String data) {
+            dataAgendamento = data;
+        }
+        public void setHorarioAgendamento(String horario) {
+            horarioAgendamento = horario;
+        }
+        public void setNomeCliente(String nome) {
+            nomeCliente = nome;
+        }
+        public void setNomePaciente(String nome) {
+            nomePaciente = nome;
+        }       
+        public void setNomeVeterinario(String nome) {
+            nomeVeterinario = nome;
+        }
+        
+        public String getDataAgendamento() {
+            return this.dataAgendamento;
+        }
+        public String getHorarioAgendamento() {
+            return this.horarioAgendamento;
+        }
+        public String getNomeCliente() {
+            return this.nomeCliente;
+        }
+        public String getNomePaciente() {
+            return this.nomePaciente;
+        }
+        public String getNomeVeterinario() {
+            return this.nomeVeterinario;
+        }
+    }
+
+    
+    public List<DadosAlterar> listarAgendamentos(String CPFCliente){
+        
+               
+        String visualizarSQL = "SELECT agendamento.data_agendamento, agendamento.horario_agendamento, agendamento.nome_paciente, veterinario.nome_veterinario FROM agendamento JOIN veterinario ON agendamento.CRMV_veterinario = veterinario.CRMV_veterinario JOIN cliente ON agendamento.cpf_cliente = cliente.cpf_cliente WHERE agendamento.cpf_cliente = ?;";
+        
+        List<DadosAlterar> listaDados = new ArrayList<>();
+        
+        try {
+            Connection conn = Conexao.getConnection();
+            PreparedStatement stmt = conn.prepareStatement(visualizarSQL);
+            stmt.setString(1, CPFCliente);
+            
+            ResultSet rs = stmt.executeQuery();
+            
+            while(rs.next()){
+                
+                DadosAlterar dados = new DadosAlterar();
+                dados.setDataAgendamento(rs.getString("data_agendamento"));
+                dados.setHorarioAgendamento(rs.getString("horario_agendamento"));
+                dados.setNomePaciente(rs.getString("nome_paciente"));
+                dados.setNomeVeterinario(rs.getString("nome_veterinario"));
+              
+                // Adiciona os dados na lista de DadosVisualizar
+                listaDados.add(dados);
+
+            }
+            
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, ex);
+        }
+        
+        return listaDados;
+    }
+
+
+    // Funcao para imprimir a lista de Agendamentos na jTable
+    public void mostrarAgendamentos(String CPF) {
+        
+        List<DadosAlterar> lista = listarAgendamentos(CPF);
+        DefaultTableModel modelo = (DefaultTableModel) jTableAgendamentos.getModel();
+        modelo.setNumRows(0);
+
+        // Pega o nome do cliente com o CPF fornecido
+        String nomeSQL = "SELECT nome_cliente FROM cliente WHERE cpf_cliente = ?;";
+        ResultSet rs = null;
+        
+        try {
+            Connection conn = Conexao.getConnection();
+            PreparedStatement stmt = conn.prepareStatement(nomeSQL);
+            stmt.setString(1, CPF);
+            
+            rs = stmt.executeQuery();
+            rs.first();
+            jLabelNomeCliente.setText(rs.getString("nome_cliente"));
+            
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, ex);
+        }
+        
+        
+        // Imprime os dados da lista na tabela
+        Object rowData[] = new Object[4];
+        
+        for (int i = 0; i < lista.size(); i++) {
+            rowData[0] = lista.get(i).dataAgendamento;
+            rowData[1] = lista.get(i).horarioAgendamento;
+            rowData[2] = lista.get(i).nomePaciente;
+            rowData[3] = lista.get(i).nomeVeterinario;
+            modelo.addRow(rowData);
+        }
+    }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -45,8 +162,9 @@ public class FrameAlterar extends javax.swing.JFrame {
         jFormattedTextFieldCPFCliente = new javax.swing.JFormattedTextField();
         jLabel6 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jTableAgendamentos = new javax.swing.JTable();
         jButtonAtualizar = new javax.swing.JButton();
+        jLabelNomeCliente = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -77,6 +195,11 @@ public class FrameAlterar extends javax.swing.JFrame {
         jButtonBuscarCPF.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jButtonBuscarCPF.setText("Buscar");
         jButtonBuscarCPF.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButtonBuscarCPF.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButtonBuscarCPFMouseClicked(evt);
+            }
+        });
         jButtonBuscarCPF.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonBuscarCPFActionPerformed(evt);
@@ -93,7 +216,7 @@ public class FrameAlterar extends javax.swing.JFrame {
 
         jFormattedTextFieldCPFCliente.setText("   .   .   -");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jTableAgendamentos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -109,7 +232,7 @@ public class FrameAlterar extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(jTableAgendamentos);
 
         jButtonAtualizar.setText("Atualizar");
 
@@ -134,7 +257,9 @@ public class FrameAlterar extends javax.swing.JFrame {
                     .addComponent(jButtonAtualizar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButtonBuscarCPF, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelNomeCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(40, 40, 40)
                 .addComponent(jLabel6))
         );
@@ -142,15 +267,22 @@ public class FrameAlterar extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1)
-                .addGap(33, 33, 33)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(33, 33, 33))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabelNomeCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jFormattedTextFieldCPFCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButtonBuscarCPF))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jButtonBuscarCPF)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jFormattedTextFieldCPFCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(1, 1, 1)))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(98, 98, 98)
@@ -186,6 +318,14 @@ public class FrameAlterar extends javax.swing.JFrame {
     private void jFormattedTextFieldHorarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFormattedTextFieldHorarioActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jFormattedTextFieldHorarioActionPerformed
+
+    private void jButtonBuscarCPFMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonBuscarCPFMouseClicked
+        
+        String CPF = jFormattedTextFieldCPFCliente.getText();
+        
+        mostrarAgendamentos(CPF);
+        
+    }//GEN-LAST:event_jButtonBuscarCPFMouseClicked
 
     /**
      * @param args the command line arguments
@@ -262,7 +402,8 @@ public class FrameAlterar extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabelNomeCliente;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTableAgendamentos;
     // End of variables declaration//GEN-END:variables
 }
