@@ -72,7 +72,7 @@ public class Notificacao {
             msg.setFrom(new InternetAddress(user));
             msg.addRecipient(Message.RecipientType.TO, new InternetAddress(this.emailDestinatario));
             msg.setSubject(this.assunto);
-            msg.setContent(this.mensagem, "text/html; charset=utf-8");
+            msg.setContent(this.mensagem, "text/plain; charset=utf-8");
                     
             // Envia a mensagem
             Transport.send(msg);
