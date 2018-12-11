@@ -107,10 +107,6 @@ public class FrameVisualizarAgendamentos extends javax.swing.JFrame {
                 listaDados.add(dados);
 
             }
-
-            rs.close();
-            stmt.close();
-            conn.close();
             
         } catch (SQLException ex) {
             Logger.getLogger(FrameVisualizarAgendamentos.class.getName()).log(Level.SEVERE, null, ex);
@@ -127,6 +123,7 @@ public class FrameVisualizarAgendamentos extends javax.swing.JFrame {
         
         List<Dados> lista = listarAgendamentos(dataAgendamento);
         DefaultTableModel modelo = (DefaultTableModel) jTable.getModel();
+        modelo.setNumRows(0);
 
         Object rowData[] = new Object[6];
         
@@ -279,7 +276,7 @@ public class FrameVisualizarAgendamentos extends javax.swing.JFrame {
         
         mostrarAgendamentos(dataFormatada.toString());
 
-        
+
     }//GEN-LAST:event_jButtonConfirmarMouseClicked
 
     private void jButtonCancelarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonCancelarMouseClicked
