@@ -10,10 +10,14 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.ParseException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.text.MaskFormatter;
 
 /**
@@ -73,10 +77,13 @@ public class FrameVisualizarAgendamentos extends javax.swing.JFrame {
         formatarData();
     }
 
+    // Funcao para recuperar a lista com os Agendamentos, dada uma dada
     public List<Dados> listarAgendamentos(String dataAgendamento){
         
                
         String visualizarSQL = "SELECT agendamento.horario_agendamento, agendamento.cpf_cliente, cliente.nome_cliente, agendamento.nome_paciente, agendamento.CRMV_veterinario, veterinario.nome_veterinario FROM agendamento JOIN veterinario ON agendamento.CRMV_veterinario = veterinario.CRMV_veterinario JOIN cliente ON agendamento.cpf_cliente = cliente.cpf_cliente WHERE agendamento.data_agendamento = ?;";
+        
+        List<Dados> listaDados = new ArrayList<>();
         
         try {
             Connection conn = Conexao.getConnection();
@@ -84,6 +91,7 @@ public class FrameVisualizarAgendamentos extends javax.swing.JFrame {
             stmt.setString(1, dataAgendamento);
             
             ResultSet rs = stmt.executeQuery();
+
             
             while(rs.next()){
                 
@@ -95,15 +103,46 @@ public class FrameVisualizarAgendamentos extends javax.swing.JFrame {
                 dados.setCRMV(rs.getString("CRMV_veterinario"));
                 dados.setNomeVeterinario(rs.getString("nome_veterinario"));
                 
+                // Adiciona os dados na lista de Dados
+                listaDados.add(dados);
+
             }
+
+            rs.close();
+            stmt.close();
+            conn.close();
             
         } catch (SQLException ex) {
             Logger.getLogger(FrameVisualizarAgendamentos.class.getName()).log(Level.SEVERE, null, ex);
         }
         
+
+        return listaDados;
         
+    }
+    
+    
+    // Funcao para imprimir a lista de Agendamentos na jTable
+    public void mostrarAgendamentos(String dataAgendamento) {
         
-    } 
+        List<Dados> lista = listarAgendamentos(dataAgendamento);
+        DefaultTableModel modelo = (DefaultTableModel) jTable.getModel();
+
+        Object rowData[] = new Object[6];
+        
+        for (int i = 0; i < lista.size(); i++) {
+            rowData[0] = lista.get(i).horarioAgendamento;
+            rowData[1] = lista.get(i).CPFCliente;
+            rowData[2] = lista.get(i).nomeCliente;
+            rowData[3] = lista.get(i).nomePaciente;
+            rowData[4] = lista.get(i).CRMV;
+            rowData[5] = lista.get(i).nomeVeterinario;
+            modelo.addRow(rowData);
+        }
+    }
+
+
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -116,10 +155,10 @@ public class FrameVisualizarAgendamentos extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jFormattedTextFieldData = new javax.swing.JFormattedTextField();
-        jButton2 = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        jButtonConfirmar = new javax.swing.JButton();
+        jButtonCancelar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jTable = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(775, 575));
@@ -136,22 +175,32 @@ public class FrameVisualizarAgendamentos extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setBackground(new java.awt.Color(153, 153, 153));
-        jButton2.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jButton2.setText("Confirmar");
-        jButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        jButtonConfirmar.setBackground(new java.awt.Color(153, 153, 153));
+        jButtonConfirmar.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jButtonConfirmar.setText("Confirmar");
+        jButtonConfirmar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButtonConfirmar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButtonConfirmarMouseClicked(evt);
+            }
+        });
+        jButtonConfirmar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                jButtonConfirmarActionPerformed(evt);
             }
         });
 
-        jButton1.setBackground(new java.awt.Color(153, 153, 153));
-        jButton1.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jButton1.setText("Cancelar");
-        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButtonCancelar.setBackground(new java.awt.Color(153, 153, 153));
+        jButtonCancelar.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jButtonCancelar.setText("Cancelar");
+        jButtonCancelar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButtonCancelar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButtonCancelarMouseClicked(evt);
+            }
+        });
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -167,7 +216,7 @@ public class FrameVisualizarAgendamentos extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(jTable);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -185,9 +234,9 @@ public class FrameVisualizarAgendamentos extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jFormattedTextFieldData, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(40, 40, 40)
-                                .addComponent(jButton1)
+                                .addComponent(jButtonCancelar)
                                 .addGap(18, 18, 18)
-                                .addComponent(jButton2))
+                                .addComponent(jButtonConfirmar))
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 683, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(40, Short.MAX_VALUE))
         );
@@ -202,8 +251,8 @@ public class FrameVisualizarAgendamentos extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jFormattedTextFieldData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jButton2)
-                        .addComponent(jButton1)))
+                        .addComponent(jButtonConfirmar)
+                        .addComponent(jButtonCancelar)))
                 .addGap(30, 30, 30)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 383, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(40, Short.MAX_VALUE))
@@ -212,13 +261,32 @@ public class FrameVisualizarAgendamentos extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void jButtonConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConfirmarActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_jButtonConfirmarActionPerformed
 
     private void jFormattedTextFieldDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFormattedTextFieldDataActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jFormattedTextFieldDataActionPerformed
+
+    private void jButtonConfirmarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonConfirmarMouseClicked
+        
+        String dataAgendamento = jFormattedTextFieldData.getText();
+        
+        // Formata a data para o MySQL
+        DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        LocalDate dataFormatada = LocalDate.parse(dataAgendamento, formato);
+        
+        mostrarAgendamentos(dataFormatada.toString());
+
+        
+    }//GEN-LAST:event_jButtonConfirmarMouseClicked
+
+    private void jButtonCancelarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonCancelarMouseClicked
+        new FrameOpcoesAgenda().setVisible(true);
+        setVisible(false);
+        dispose();
+    }//GEN-LAST:event_jButtonCancelarMouseClicked
 
     /**
      * @param args the command line arguments
@@ -266,12 +334,12 @@ public class FrameVisualizarAgendamentos extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButtonCancelar;
+    private javax.swing.JButton jButtonConfirmar;
     private javax.swing.JFormattedTextField jFormattedTextFieldData;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTable;
     // End of variables declaration//GEN-END:variables
 }
