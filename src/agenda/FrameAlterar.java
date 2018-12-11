@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 import javax.swing.text.MaskFormatter;
 
 /**
@@ -27,13 +28,13 @@ public class FrameAlterar extends javax.swing.JFrame {
      */
     public FrameAlterar() {
         initComponents();
-        formatarData();
-        formatarHorario();
+        //formatarData();
+        //formatarHorario();
         formatarCPF();
     }
 
     public class DadosAlterar {
-        private String dataAgendamento, horarioAgendamento, CPFCliente, nomeCliente, nomePaciente, CRMV, nomeVeterinario;
+        private String dataAgendamento, horarioAgendamento, nomeCliente, nomePaciente, CRMV, nomeVeterinario;
         
         public void setDataAgendamento(String data) {
             dataAgendamento = data;
@@ -46,7 +47,10 @@ public class FrameAlterar extends javax.swing.JFrame {
         }
         public void setNomePaciente(String nome) {
             nomePaciente = nome;
-        }       
+        }
+        public void setCRMV(String crmv) {
+            CRMV = crmv;
+        }  
         public void setNomeVeterinario(String nome) {
             nomeVeterinario = nome;
         }
@@ -72,7 +76,7 @@ public class FrameAlterar extends javax.swing.JFrame {
     public List<DadosAlterar> listarAgendamentos(String CPFCliente){
         
                
-        String visualizarSQL = "SELECT agendamento.data_agendamento, agendamento.horario_agendamento, agendamento.nome_paciente, veterinario.nome_veterinario FROM agendamento JOIN veterinario ON agendamento.CRMV_veterinario = veterinario.CRMV_veterinario JOIN cliente ON agendamento.cpf_cliente = cliente.cpf_cliente WHERE agendamento.cpf_cliente = ?;";
+        String visualizarSQL = "SELECT agendamento.data_agendamento, agendamento.horario_agendamento, agendamento.nome_paciente, veterinario.CRMV_veterinario, veterinario.nome_veterinario FROM agendamento JOIN veterinario ON agendamento.CRMV_veterinario = veterinario.CRMV_veterinario JOIN cliente ON agendamento.cpf_cliente = cliente.cpf_cliente WHERE agendamento.cpf_cliente = ?;";
         
         List<DadosAlterar> listaDados = new ArrayList<>();
         
@@ -89,6 +93,7 @@ public class FrameAlterar extends javax.swing.JFrame {
                 dados.setDataAgendamento(rs.getString("data_agendamento"));
                 dados.setHorarioAgendamento(rs.getString("horario_agendamento"));
                 dados.setNomePaciente(rs.getString("nome_paciente"));
+                dados.setCRMV(rs.getString("CRMV_veterinario"));
                 dados.setNomeVeterinario(rs.getString("nome_veterinario"));
               
                 // Adiciona os dados na lista de DadosVisualizar
@@ -130,13 +135,14 @@ public class FrameAlterar extends javax.swing.JFrame {
         
         
         // Imprime os dados da lista na tabela
-        Object rowData[] = new Object[4];
+        Object rowData[] = new Object[5];
         
         for (int i = 0; i < lista.size(); i++) {
             rowData[0] = lista.get(i).dataAgendamento;
             rowData[1] = lista.get(i).horarioAgendamento;
             rowData[2] = lista.get(i).nomePaciente;
-            rowData[3] = lista.get(i).nomeVeterinario;
+            rowData[3] = lista.get(i).CRMV;
+            rowData[4] = lista.get(i).nomeVeterinario;
             modelo.addRow(rowData);
         }
     }
@@ -174,7 +180,6 @@ public class FrameAlterar extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabel2.setText("Data:");
 
-        jFormattedTextFieldData.setText("  /  /");
         jFormattedTextFieldData.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jFormattedTextFieldDataActionPerformed(evt);
@@ -184,7 +189,6 @@ public class FrameAlterar extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabel3.setText("Horario:");
 
-        jFormattedTextFieldHorario.setText("  :");
         jFormattedTextFieldHorario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jFormattedTextFieldHorarioActionPerformed(evt);
@@ -221,15 +225,20 @@ public class FrameAlterar extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Data", "Horário", "Paciente", "Veterinário"
+                "Data", "Horário", "Paciente", "CRMV", "Veterinário"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, true, false
+                false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
+            }
+        });
+        jTableAgendamentos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTableAgendamentosMouseClicked(evt);
             }
         });
         jScrollPane1.setViewportView(jTableAgendamentos);
@@ -256,12 +265,15 @@ public class FrameAlterar extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jButtonAtualizar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButtonBuscarCPF, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabelNomeCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(40, 40, 40)
-                .addComponent(jLabel6))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 498, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 51, Short.MAX_VALUE)
+                        .addComponent(jLabel6))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabelNomeCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -326,6 +338,17 @@ public class FrameAlterar extends javax.swing.JFrame {
         mostrarAgendamentos(CPF);
         
     }//GEN-LAST:event_jButtonBuscarCPFMouseClicked
+
+    private void jTableAgendamentosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableAgendamentosMouseClicked
+       
+        int posicao = jTableAgendamentos.getSelectedRow();
+        TableModel modelo = jTableAgendamentos.getModel();
+
+        jFormattedTextFieldData.setText(modelo.getValueAt(posicao, 0).toString());
+        jFormattedTextFieldHorario.setText(modelo.getValueAt(posicao, 1).toString());
+        
+        
+    }//GEN-LAST:event_jTableAgendamentosMouseClicked
 
     /**
      * @param args the command line arguments

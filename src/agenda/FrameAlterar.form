@@ -42,13 +42,18 @@
                   <Component id="jButtonAtualizar" max="32767" attributes="0"/>
                   <Component id="jButtonBuscarCPF" pref="100" max="32767" attributes="0"/>
               </Group>
-              <EmptySpace pref="48" max="32767" attributes="0"/>
+              <EmptySpace pref="52" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jScrollPane1" min="-2" pref="452" max="-2" attributes="0"/>
-                  <Component id="jLabelNomeCliente" min="-2" pref="180" max="-2" attributes="0"/>
+                  <Group type="102" attributes="0">
+                      <Component id="jScrollPane1" min="-2" pref="498" max="-2" attributes="0"/>
+                      <EmptySpace pref="51" max="32767" attributes="0"/>
+                      <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" attributes="0">
+                      <Component id="jLabelNomeCliente" min="-2" pref="180" max="-2" attributes="0"/>
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                  </Group>
               </Group>
-              <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
-              <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -124,9 +129,6 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JFormattedTextField" name="jFormattedTextFieldData">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="  /  /"/>
-      </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jFormattedTextFieldDataActionPerformed"/>
       </Events>
@@ -140,9 +142,6 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JFormattedTextField" name="jFormattedTextFieldHorario">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="  :"/>
-      </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jFormattedTextFieldHorarioActionPerformed"/>
       </Events>
@@ -204,15 +203,21 @@
         <Component class="javax.swing.JTable" name="jTableAgendamentos">
           <Properties>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-              <Table columnCount="4" rowCount="0">
+              <Table columnCount="5" rowCount="0">
                 <Column editable="false" title="Data" type="java.lang.Object"/>
                 <Column editable="false" title="Hor&#xe1;rio" type="java.lang.Object"/>
-                <Column editable="true" title="Paciente" type="java.lang.Object"/>
+                <Column editable="false" title="Paciente" type="java.lang.Object"/>
+                <Column editable="false" title="CRMV" type="java.lang.Object"/>
                 <Column editable="false" title="Veterin&#xe1;rio" type="java.lang.Object"/>
               </Table>
             </Property>
             <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
               <TableColumnModel selectionModel="0">
+                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                  <Title/>
+                  <Editor/>
+                  <Renderer/>
+                </Column>
                 <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
                   <Title/>
                   <Editor/>
@@ -239,6 +244,9 @@
               <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jTableAgendamentosMouseClicked"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
