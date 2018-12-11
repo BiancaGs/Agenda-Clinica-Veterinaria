@@ -26,7 +26,7 @@ import javax.swing.text.MaskFormatter;
  */
 public class FrameVisualizarAgendamentos extends javax.swing.JFrame {
 
-    public class Dados {
+    public class DadosVisualizar {
         private String horarioAgendamento, CPFCliente, nomeCliente, nomePaciente, CRMV, nomeVeterinario;
         
         public void setHorarioAgendamento(String time) {
@@ -78,12 +78,12 @@ public class FrameVisualizarAgendamentos extends javax.swing.JFrame {
     }
 
     // Funcao para recuperar a lista com os Agendamentos, dada uma dada
-    public List<Dados> listarAgendamentos(String dataAgendamento){
+    public List<DadosVisualizar> listarAgendamentos(String dataAgendamento){
         
                
         String visualizarSQL = "SELECT agendamento.horario_agendamento, agendamento.cpf_cliente, cliente.nome_cliente, agendamento.nome_paciente, agendamento.CRMV_veterinario, veterinario.nome_veterinario FROM agendamento JOIN veterinario ON agendamento.CRMV_veterinario = veterinario.CRMV_veterinario JOIN cliente ON agendamento.cpf_cliente = cliente.cpf_cliente WHERE agendamento.data_agendamento = ?;";
         
-        List<Dados> listaDados = new ArrayList<>();
+        List<DadosVisualizar> listaDados = new ArrayList<>();
         
         try {
             Connection conn = Conexao.getConnection();
@@ -95,7 +95,7 @@ public class FrameVisualizarAgendamentos extends javax.swing.JFrame {
             
             while(rs.next()){
                 
-                Dados dados = new Dados();
+                DadosVisualizar dados = new DadosVisualizar();
                 dados.setHorarioAgendamento(rs.getString("horario_agendamento"));
                 dados.setCPFCliente(rs.getString("cpf_cliente"));
                 dados.setNomeCliente(rs.getString("nome_cliente"));
@@ -103,7 +103,7 @@ public class FrameVisualizarAgendamentos extends javax.swing.JFrame {
                 dados.setCRMV(rs.getString("CRMV_veterinario"));
                 dados.setNomeVeterinario(rs.getString("nome_veterinario"));
                 
-                // Adiciona os dados na lista de Dados
+                // Adiciona os dados na lista de DadosVisualizar
                 listaDados.add(dados);
 
             }
@@ -121,7 +121,7 @@ public class FrameVisualizarAgendamentos extends javax.swing.JFrame {
     // Funcao para imprimir a lista de Agendamentos na jTable
     public void mostrarAgendamentos(String dataAgendamento) {
         
-        List<Dados> lista = listarAgendamentos(dataAgendamento);
+        List<DadosVisualizar> lista = listarAgendamentos(dataAgendamento);
         DefaultTableModel modelo = (DefaultTableModel) jTable.getModel();
         modelo.setNumRows(0);
 
