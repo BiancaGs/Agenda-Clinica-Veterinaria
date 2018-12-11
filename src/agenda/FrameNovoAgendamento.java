@@ -252,8 +252,13 @@ public class FrameNovoAgendamento extends javax.swing.JFrame {
         Agendamento a = new Agendamento(dataFormatada, horarioFormatado);
         
         
-        FacadeAgenda facade = new FacadeAgenda(c, p, v, a);
+        FacadeAgenda facade = new FacadeAgenda();
+        facade.setCliente(c);
+        facade.setPaciente(p);
+        facade.setVeterinario(v);
+        facade.setAgendamento(a);
         
+        // Realiza o agendamento
         facade.agendarAgendamento();
         
         //Fecha o frame NovoAgendamento após ConfirmarAgendamento

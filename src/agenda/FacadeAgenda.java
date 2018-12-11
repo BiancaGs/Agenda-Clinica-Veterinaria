@@ -28,14 +28,19 @@ public class FacadeAgenda {
     
     private Connection conn;
     
-    // Construtor
-    public FacadeAgenda(Cliente c, Paciente p, Veterinario v, Agendamento a) {
-        this.agendamento = a;
-        this.cliente = c;
-        this.paciente = p;
-        this.veterinario = v;
+    // Setters
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
     }
-    
+    public void setPaciente(Paciente paciente) {
+        this.paciente = paciente;
+    }
+    public void setVeterinario(Veterinario veterinario) {
+        this.veterinario = veterinario;
+    }
+    public void setAgendamento(Agendamento agendamento) {
+        this.agendamento = agendamento;
+    }
     public static void main(String[] args){
         new FrameOpcoesAgenda().setVisible(true);
     }
