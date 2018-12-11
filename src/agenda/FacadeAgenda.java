@@ -52,11 +52,22 @@ public class FacadeAgenda {
             JOptionPane.showMessageDialog(null, "Horário fora do Expediente!");
             return;
         }
-        
 
+        
         // Recupera a conexão
         conn = Conexao.getConnection();
         OperacoesBD op = new OperacoesBD();              
+        
+        
+        // Verifica a disponibilidade do Veterinario
+        try {
+            if (!op.verificarDisponibilidade(conn, this.agendamento.getDataAgendamento().toString(), this.agendamento.getHorarioAgendamento().toString(), this.veterinario.getCRMV())) {
+                JOptionPane.showMessageDialog(null, "Horário Indisponivel nos Agendamentos do Veterinario!");
+                return;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(FacadeAgenda.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
         ResultSet rsV = null;
         ResultSet rsC = null;

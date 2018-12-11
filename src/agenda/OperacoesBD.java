@@ -61,7 +61,7 @@ public class OperacoesBD {
         return rs;
     }
     
-        public ResultSet buscarCliente(Connection conn, String CPFCliente) throws SQLException {
+    public ResultSet buscarCliente(Connection conn, String CPFCliente) throws SQLException {
         
         String selectSQL = "SELECT * FROM cliente WHERE cpf_cliente = ?;";
         
@@ -73,5 +73,23 @@ public class OperacoesBD {
         return rs;
     }
     
+    public boolean verificarDisponibilidade(Connection conn, String dataAgendamento, String horarioAgendamento, String CRMV) throws SQLException {
+
+        String verificaSQL = "SELECT * FROM agendamento WHERE data_agendamento = ? AND horario_agendamento = ? AND CRMV_veterinario = ?;";
+
+        PreparedStatement stmt = conn.prepareStatement(verificaSQL);
+        stmt.setString(1, dataAgendamento);
+        stmt.setString(2, horarioAgendamento);
+        stmt.setString(3, CRMV);
+
+        ResultSet rs = stmt.executeQuery();
+
+        if (!rs.next()) {
+            return true;
+        }
+
+        return false;
+
+    }
     
 }
