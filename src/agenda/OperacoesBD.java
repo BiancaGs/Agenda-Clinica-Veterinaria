@@ -111,7 +111,7 @@ public class OperacoesBD {
 
     public void atualizarAgendamento(Connection conn, Agendamento antigo, Agendamento novo, Cliente c, Veterinario v, Paciente p) throws SQLException {
 
-        String updateSQL = "UPDATE agendamento SET dada_agendamento = ?, horario_agendamento = ? WHERE data_agendamento = ? AND horario_agendamento = ? AND cpf_cliente = ? AND nome_paciente = ? AND CRMV_veterinario = ?;";
+        String updateSQL = "UPDATE agendamento SET data_agendamento = ?, horario_agendamento = ? WHERE data_agendamento = ? AND horario_agendamento = ? AND cpf_cliente = ? AND nome_paciente = ? AND CRMV_veterinario = ?;";
 
         PreparedStatement stmt = conn.prepareStatement(updateSQL);
         stmt.setString(1, novo.getDataAgendamento().toString());

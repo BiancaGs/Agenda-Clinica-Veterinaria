@@ -421,20 +421,6 @@ public class FrameAlterar extends javax.swing.JFrame {
         try {
             Connection conn = Conexao.getConnection();
 
-            System.out.println("Agendamento Antigo:");
-            System.out.println(this.agendamentoAntigo.getDataAgendamento().toString());
-            System.out.println(this.agendamentoAntigo.getHorarioAgendamento().toString());
-            System.out.println("Agendamento Novo:");
-            System.out.println(agendamentoNovo.getDataAgendamento().toString());
-            System.out.println(agendamentoNovo.getHorarioAgendamento().toString());
-            System.out.println("Paciente:");
-            System.out.println(this.paciente.getNomePaciente());
-            System.out.println("Cliente:");
-            System.out.println(cliente.getCPFCliente());
-            System.out.println("Veterinario:");
-            System.out.println(this.veterinario.getCRMV());
-
-
             op.atualizarAgendamento(conn, this.agendamentoAntigo, agendamentoNovo, cliente, this.veterinario, this.paciente);
             
             JOptionPane.showMessageDialog(null, "Agendamento Alterado com Sucesso!");            
@@ -445,6 +431,7 @@ public class FrameAlterar extends javax.swing.JFrame {
 
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Falha na Alteração do Agendamento!");
+            JOptionPane.showMessageDialog(null, ex);
         }
 
 
