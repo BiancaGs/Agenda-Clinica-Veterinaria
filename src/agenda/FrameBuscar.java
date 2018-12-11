@@ -5,8 +5,17 @@
  */
 package agenda;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.text.MaskFormatter;
 
 /**
@@ -14,13 +23,101 @@ import javax.swing.text.MaskFormatter;
  * @author Usuario
  */
 public class FrameBuscar extends javax.swing.JFrame {
-
+    
+    public class Dados {
+        private String dataAgendamento, horarioAgendamento, CPFCliente, nomeCliente, nomePaciente, CRMV, nomeVeterinario;
+        
+        public void setDataAgendamento(String data) {
+            dataAgendamento = data;
+        }
+        public void setHorarioAgendamento(String horario) {
+            horarioAgendamento = horario;
+        }
+        public void setNomeCliente(String nome) {
+            nomeCliente = nome;
+        }
+        public void setNomePaciente(String nome) {
+            nomePaciente = nome;
+        }       
+        public void setNomeVeterinario(String nome) {
+            nomeVeterinario = nome;
+        }
+        
+        public String getDataAgendamento() {
+            return this.dataAgendamento;
+        }
+        public String getHorarioAgendamento() {
+            return this.horarioAgendamento;
+        }
+        public String getNomeCliente() {
+            return this.nomeCliente;
+        }
+        public String getNomePaciente() {
+            return this.nomePaciente;
+        }
+        public String getNomeVeterinario() {
+            return this.nomeVeterinario;
+        }
+    }
     /**
      * Creates new form FrameOpcoesBuscar
      */
     public FrameBuscar() {
         initComponents();
         formatarCPF();
+    }
+    
+    public List<Dados> listarAgendamentos(String CPFCliente){
+        
+               
+        String visualizarSQL = "SELECT agendamento.data_agendamento, agendamento.horario_agendamento, agendamento.nome_paciente, veterinario.nome_veterinario FROM agendamento JOIN veterinario ON agendamento.CRMV_veterinario = veterinario.CRMV_veterinario JOIN cliente ON agendamento.cpf_cliente = cliente.cpf_cliente WHERE agendamento.cpf_cliente = ?;";
+        
+        List<Dados> listaDados = new ArrayList<>();
+        
+        try {
+            Connection conn = Conexao.getConnection();
+            PreparedStatement stmt = conn.prepareStatement(visualizarSQL);
+            stmt.setString(1, CPFCliente);
+            
+            ResultSet rs = stmt.executeQuery();
+            
+            while(rs.next()){
+                
+                Dados dados = new Dados();
+                dados.setDataAgendamento(rs.getString("data_agendamento"));
+                dados.setHorarioAgendamento(rs.getString("horario_agendamento"));
+                //dados.setNomeCliente(rs.getString("nome_cliente"));
+                dados.setNomePaciente(rs.getString("nome_paciente"));
+                dados.setNomeVeterinario(rs.getString("nome_veterinario"));
+              
+                // Adiciona os dados na lista de DadosVisualizar
+                listaDados.add(dados);
+
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(FrameBuscar.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return listaDados;
+    }
+    
+    // Funcao para imprimir a lista de Agendamentos na jTable
+    public void mostrarAgendamentos(String CPF) {
+        
+        List<Dados> lista = listarAgendamentos(CPF);
+        DefaultTableModel modelo = (DefaultTableModel) jTableBusca.getModel();
+        modelo.setNumRows(0);
+
+        Object rowData[] = new Object[4];
+        
+        for (int i = 0; i < lista.size(); i++) {
+            rowData[0] = lista.get(i).dataAgendamento;
+            rowData[1] = lista.get(i).horarioAgendamento;
+            rowData[2] = lista.get(i).nomePaciente;
+            rowData[3] = lista.get(i).nomeVeterinario;
+            modelo.addRow(rowData);
+        }
     }
 
     /**
@@ -40,7 +137,7 @@ public class FrameBuscar extends javax.swing.JFrame {
         jFormattedTextFieldCPFCliente1 = new javax.swing.JFormattedTextField();
         jButtonBuscarCPF = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jTableBusca = new javax.swing.JTable();
         jLabel3 = new javax.swing.JLabel();
 
         jFormattedTextFieldCPFCliente.addActionListener(new java.awt.event.ActionListener() {
@@ -88,7 +185,7 @@ public class FrameBuscar extends javax.swing.JFrame {
             }
         });
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jTableBusca.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -104,10 +201,10 @@ public class FrameBuscar extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTable1);
-        if (jTable1.getColumnModel().getColumnCount() > 0) {
-            jTable1.getColumnModel().getColumn(0).setPreferredWidth(100);
-            jTable1.getColumnModel().getColumn(1).setPreferredWidth(100);
+        jScrollPane1.setViewportView(jTableBusca);
+        if (jTableBusca.getColumnModel().getColumnCount() > 0) {
+            jTableBusca.getColumnModel().getColumn(0).setPreferredWidth(100);
+            jTableBusca.getColumnModel().getColumn(1).setPreferredWidth(100);
         }
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -179,7 +276,9 @@ public class FrameBuscar extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonCancelarActionPerformed
 
     private void jButtonBuscarCPFMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonBuscarCPFMouseClicked
-        // TODO add your handling code here:
+        String CPF = jFormattedTextFieldCPFCliente1.getText();
+        
+        mostrarAgendamentos(CPF);
     }//GEN-LAST:event_jButtonBuscarCPFMouseClicked
 
     /**
@@ -237,6 +336,6 @@ public class FrameBuscar extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTableBusca;
     // End of variables declaration//GEN-END:variables
 }
