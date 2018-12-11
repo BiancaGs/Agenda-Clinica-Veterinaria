@@ -109,6 +109,25 @@ public class FrameBuscar extends javax.swing.JFrame {
         DefaultTableModel modelo = (DefaultTableModel) jTableBusca.getModel();
         modelo.setNumRows(0);
 
+        // Pega o nome do cliente com o CPF dado
+        String nomeSQL = "SELECT nome_cliente FROM cliente WHERE cpf_cliente = ?;";
+        ResultSet rs = null;
+        
+        try {
+            Connection conn = Conexao.getConnection();
+            PreparedStatement stmt = conn.prepareStatement(nomeSQL);
+            stmt.setString(1, CPF);
+            
+            rs = stmt.executeQuery();
+            rs.first();
+            jLabelCPF.setText(rs.getString("nome_cliente"));
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(FrameBuscar.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
+        // Imprime os dados da lista na tabela
         Object rowData[] = new Object[4];
         
         for (int i = 0; i < lista.size(); i++) {
@@ -138,7 +157,7 @@ public class FrameBuscar extends javax.swing.JFrame {
         jButtonBuscarCPF = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableBusca = new javax.swing.JTable();
-        jLabel3 = new javax.swing.JLabel();
+        jLabelCPF = new javax.swing.JLabel();
 
         jFormattedTextFieldCPFCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -226,7 +245,7 @@ public class FrameBuscar extends javax.swing.JFrame {
                     .addComponent(jLabel6)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
+                            .addComponent(jLabelCPF, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
                             .addComponent(jFormattedTextFieldCPFCliente1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE))
                         .addGap(0, 0, 0)
                         .addComponent(jLabel2)
@@ -254,7 +273,7 @@ public class FrameBuscar extends javax.swing.JFrame {
                             .addComponent(jButtonBuscarCPF)
                             .addComponent(jButtonVoltar))))
                 .addGap(18, 18, 18)
-                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabelCPF, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(43, Short.MAX_VALUE))
@@ -343,8 +362,8 @@ public class FrameBuscar extends javax.swing.JFrame {
     private javax.swing.JFormattedTextField jFormattedTextFieldCPFCliente1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabelCPF;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTableBusca;
     // End of variables declaration//GEN-END:variables
