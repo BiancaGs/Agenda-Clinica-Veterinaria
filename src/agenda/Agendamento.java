@@ -55,13 +55,6 @@ public class Agendamento {
 
 
     // Funcões Auxiliares
-    public LocalDate toMysqlDate(String data) {
-        
-        DateTimeFormatter formatoBR = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        LocalDate dataFormatada = LocalDate.parse(data, formatoBR);
-
-        return dataFormatada;
-    }
 
     public String toBRFormat(String data) {
         String ano = data.substring(0, 4);

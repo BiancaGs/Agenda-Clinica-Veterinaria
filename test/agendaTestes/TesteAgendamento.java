@@ -31,17 +31,17 @@ public class TesteAgendamento {
     //--------------------------- DATA -------------------------------    
     @Test
     public void teste1Data() {
-        assertEquals("2019-01-12", a.toMysqlDate("12/01/2019").toString());
+        assertEquals("2019-01-12", a.BRtoLocalDate("12/01/2019").toString());
     }
 
     @Test
     public void teste2Data() {
-        assertEquals("2019-10-25", a.toMysqlDate("25/10/2019").toString());
+        assertEquals("2019-10-25", a.BRtoLocalDate("25/10/2019").toString());
     }
 
     @Test
     public void teste3Data() {
-        assertEquals("2018-12-30", a.toMysqlDate("30/12/2018").toString());
+        assertEquals("2018-12-30", a.BRtoLocalDate("30/12/2018").toString());
     }
 
     //------------------------------------------------------------------
