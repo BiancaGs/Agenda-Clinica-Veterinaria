@@ -125,6 +125,11 @@ public class FrameVisualizarAgendamentos extends javax.swing.JFrame {
         DefaultTableModel modelo = (DefaultTableModel) jTable.getModel();
         modelo.setNumRows(0);
 
+        if (lista.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Nenhum Agendamento Encontrado para o dia: '" + jFormattedTextFieldData.getText() + "'!");
+            return;
+        }
+
         Object rowData[] = new Object[6];
         
         for (int i = 0; i < lista.size(); i++) {
