@@ -27,22 +27,58 @@ public class TesteAgendamento {
         
 
     }
-    
+
+    //--------------------------- DATA -------------------------------    
     @Test
     public void teste1Data() {
-        assertEquals("2019-01-12", a.toLocalDate("12/01/2019").toString());
+        assertEquals("2019-01-12", a.toMysqlDate("12/01/2019").toString());
     }
 
     @Test
     public void teste2Data() {
-        assertEquals("2019-01-12", a.toLocalDate("2019-01-12").toString());
+        assertEquals("2019-10-25", a.toMysqlDate("25/10/2019").toString());
     }
 
     @Test
     public void teste3Data() {
-        assertEquals("12/01/2019", a.toLocalDate("12/01/2019").toString());
+        assertEquals("2018-12-30", a.toMysqlDate("30/12/2018").toString());
     }
-    
+
+    //------------------------------------------------------------------
+    @Test
+    public void teste4Data() {
+        assertEquals("24/08/2019", a.toBRFormat("2019-08-24"));
+    }
+
+    @Test
+    public void teste5Data() {
+        assertEquals("12/01/2019", a.toBRFormat("2019-01-12"));
+    }
+
+    @Test
+    public void teste6Data() {
+        assertEquals("25/12/2018", a.toBRFormat("2018-12-25"));
+    }
+
+    //------------------------------------------------------------------
+    @Test
+    public void teste7Data() {
+        assertEquals("2019-08-24", a.toUSFormat("24/08/2019"));
+    }
+
+    @Test
+    public void teste8Data() {
+        assertEquals("2019-01-12", a.toUSFormat("12/01/2019"));
+    }
+
+    @Test
+    public void teste9Data() {
+        assertEquals("2018-12-25", a.toUSFormat("25/12/2018"));
+    }
+
+
+
+    //------------------------- TIME ----------------------------------
     @Test
     public void teste1Horario() {
         assertEquals("13:30:00", a.toTime("13:30").toString());

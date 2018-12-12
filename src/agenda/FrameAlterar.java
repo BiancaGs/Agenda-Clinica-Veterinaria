@@ -416,7 +416,7 @@ public class FrameAlterar extends javax.swing.JFrame {
 
         
         Agendamento agendamentoNovo = new Agendamento();
-        agendamentoNovo.setDataAgendamento(agendamentoNovo.toLocalDate(jFormattedTextFieldData.getText()));
+        agendamentoNovo.setDataAgendamento(agendamentoNovo.toMysqlDate(jFormattedTextFieldData.getText()));
         agendamentoNovo.setHorarioAgendamento(agendamentoNovo.toTime(jFormattedTextFieldHorario.getText()));
 
 

@@ -184,7 +184,7 @@ public class FrameExcluirAgendamento extends javax.swing.JFrame {
 
 
         Agendamento a = new Agendamento();
-        a.setDataAgendamento(a.toLocalDate(dataAgendamento));
+        a.setDataAgendamento(a.toMysqlDate(dataAgendamento));
         a.setHorarioAgendamento(a.toTime(horarioAgendamento));
         
         

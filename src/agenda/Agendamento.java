@@ -55,14 +55,32 @@ public class Agendamento {
 
 
     // Funcões Auxiliares
-    public LocalDate toLocalDate(String data) {
+    public LocalDate toMysqlDate(String data) {
         
-        DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        LocalDate dataFormatada = LocalDate.parse(data, formato);
-        
+        DateTimeFormatter formatoBR = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        LocalDate dataFormatada = LocalDate.parse(data, formatoBR);
+
         return dataFormatada;
     }
-    
+
+    public String toBRFormat(String data) {
+        String ano = data.substring(0, 4);
+        String mes = data.substring(5, 7);
+        String dia = data.substring(8, 10);
+
+        String dataBR = dia + "/" + mes + "/" + ano;
+        return dataBR;
+    }
+
+    public String toUSFormat(String data) {
+        String dia = data.substring(0, 2);
+        String mes = data.substring(3, 5);
+        String ano = data.substring(6, 10);
+
+        String dataUS = ano + "-" + mes + "-" + dia;
+        return dataUS;
+    }
+
     public Time toTime(String horario) {
         
         SimpleDateFormat formatoH = new SimpleDateFormat("HH:mm");
