@@ -197,6 +197,7 @@ public class FrameBuscar extends javax.swing.JFrame {
         jButtonBuscarCPF.setBackground(new java.awt.Color(153, 153, 153));
         jButtonBuscarCPF.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jButtonBuscarCPF.setText("Buscar");
+        jButtonBuscarCPF.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButtonBuscarCPF.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jButtonBuscarCPFMouseClicked(evt);

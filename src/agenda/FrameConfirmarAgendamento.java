@@ -188,6 +188,7 @@ public class FrameConfirmarAgendamento extends javax.swing.JFrame {
         jButtonConfirmar.setBackground(new java.awt.Color(153, 153, 153));
         jButtonConfirmar.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jButtonConfirmar.setText("Confirmar");
+        jButtonConfirmar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButtonConfirmar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jButtonConfirmarMouseClicked(evt);
@@ -202,6 +203,7 @@ public class FrameConfirmarAgendamento extends javax.swing.JFrame {
         jButtonCancelar.setBackground(new java.awt.Color(153, 153, 153));
         jButtonCancelar.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jButtonCancelar.setText("Cancelar");
+        jButtonCancelar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButtonCancelar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jButtonCancelarMouseClicked(evt);

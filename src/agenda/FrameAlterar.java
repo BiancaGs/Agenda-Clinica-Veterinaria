@@ -262,7 +262,10 @@ public class FrameAlterar extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(jTableAgendamentos);
 
+        jButtonAtualizar.setBackground(new java.awt.Color(153, 153, 153));
+        jButtonAtualizar.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jButtonAtualizar.setText("Atualizar");
+        jButtonAtualizar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButtonAtualizar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jButtonAtualizarMouseClicked(evt);
