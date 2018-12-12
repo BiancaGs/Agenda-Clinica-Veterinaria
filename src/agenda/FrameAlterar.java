@@ -376,14 +376,12 @@ public class FrameAlterar extends javax.swing.JFrame {
         String nomePacienteTabela = modelo.getValueAt(posicao, 2).toString();
         String CRMVTabela = modelo.getValueAt(posicao, 3).toString();
 
-        
-        // Formata a data
-        DateTimeFormatter formatoUS = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        LocalDate date = LocalDate.parse(dataAgendamentoTabela, formatoUS);
-        
-        DateTimeFormatter formatoBR = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        String dataFormatada = formatoBR.format(date);
 
+        this.agendamentoAntigo = new Agendamento();
+
+        // Converte a data para o formato BR
+        String dataBR = this.agendamentoAntigo.toBRFormat(dataAgendamentoTabela);
+        
 
         // Converte o horário
         SimpleDateFormat formatoH = new SimpleDateFormat("HH:mm:ss");
@@ -395,18 +393,22 @@ public class FrameAlterar extends javax.swing.JFrame {
         }
         Time horarioFormatado = new Time(dataHorario.getTime());
         
-
-        this.agendamentoAntigo = new Agendamento(date, horarioFormatado);
         
+        // Agendamento
+        this.agendamentoAntigo.setDataAgendamento(this.agendamentoAntigo.BRtoLocalDate(dataBR));
+        this.agendamentoAntigo.setHorarioAgendamento(horarioFormatado);
+
+        // Paciente
         this.paciente = new Paciente();
         this.paciente.setNomePaciente(nomePacienteTabela);
 
+        // Veterinario
         this.veterinario = new Veterinario();
         this.veterinario.setCRMV(CRMVTabela);
 
         
 
-        jFormattedTextFieldData.setText(dataFormatada);
+        jFormattedTextFieldData.setText(dataBR);
         jFormattedTextFieldHorario.setText(horarioFormatado.toString());
         
 

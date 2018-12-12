@@ -280,11 +280,10 @@ public class FrameVisualizarAgendamentos extends javax.swing.JFrame {
         
         String dataAgendamento = jFormattedTextFieldData.getText();
         
-        // Formata a data para o MySQL
-        DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        LocalDate dataFormatada = LocalDate.parse(dataAgendamento, formato);
+        Agendamento a = new Agendamento();
+        a.setDataAgendamento(a.BRtoLocalDate(dataAgendamento));
         
-        mostrarAgendamentos(dataFormatada.toString());
+        mostrarAgendamentos(a.getDataAgendamento().toString());
 
 
     }//GEN-LAST:event_jButtonConfirmarMouseClicked

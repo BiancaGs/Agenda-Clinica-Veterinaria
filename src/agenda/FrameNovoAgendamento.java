@@ -236,7 +236,7 @@ public class FrameNovoAgendamento extends javax.swing.JFrame {
 
 
         Agendamento a = new Agendamento();
-        a.setDataAgendamento(a.toMysqlDate(data));
+        a.setDataAgendamento(a.BRtoLocalDate(data));
         a.setHorarioAgendamento(a.toTime(horario));
 
         

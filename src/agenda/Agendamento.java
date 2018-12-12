@@ -81,6 +81,18 @@ public class Agendamento {
         return dataUS;
     }
 
+    public LocalDate BRtoLocalDate(String data) {
+        DateTimeFormatter formatador = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        LocalDate localDate = LocalDate.parse(data, formatador);
+        return localDate;
+    }
+    
+    public LocalDate UStoLocalDate(String data) {
+        LocalDate localDate = LocalDate.parse(data);
+        return localDate; 
+    }
+
+
     public Time toTime(String horario) {
         
         SimpleDateFormat formatoH = new SimpleDateFormat("HH:mm");
