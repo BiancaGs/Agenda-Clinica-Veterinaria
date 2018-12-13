@@ -137,7 +137,7 @@ public class FacadeAgenda {
 
         OperacoesBD op = new OperacoesBD();
         try {
-            Connection conn = Conexao.getConnection();
+            conn = Conexao.getConnection();
             int resultado = op.removerAgendamento(conn, this.agendamento, this.cliente.getCPFCliente());
             
             if (resultado != 0) {
@@ -159,7 +159,7 @@ public class FacadeAgenda {
 
         OperacoesBD op = new OperacoesBD();
         try {
-            Connection conn = Conexao.getConnection();
+            conn = Conexao.getConnection();
 
             op.atualizarAgendamento(conn, antigo, this.agendamento, this.cliente, this.veterinario, this.paciente);
             

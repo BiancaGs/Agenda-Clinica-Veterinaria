@@ -279,9 +279,17 @@ public class FrameVisualizarAgendamentos extends javax.swing.JFrame {
     private void jButtonConfirmarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonConfirmarMouseClicked
         
         String dataAgendamento = jFormattedTextFieldData.getText();
+
+        if (dataAgendamento.trim().length() < 10) {
+            JOptionPane.showMessageDialog(null, "Existem Campos Invalidos!\nFavor preencher.");
+        }
         
         Agendamento a = new Agendamento();
-        a.setDataAgendamento(a.BRtoLocalDate(dataAgendamento));
+        try {
+            a.setDataAgendamento(a.BRtoLocalDate(dataAgendamento));
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
         
         mostrarAgendamentos(a.getDataAgendamento().toString());
 

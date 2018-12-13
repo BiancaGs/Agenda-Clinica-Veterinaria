@@ -223,6 +223,12 @@ public class FrameNovoAgendamento extends javax.swing.JFrame {
         String CRMVVeterinario = jFormattedTextFieldCRMV.getText();
         String nomePaciente = jTextFieldPaciente.getText();
         String CPFCliente = jFormattedTextFieldCPFCliente.getText();
+
+        // Verifica campos em branco
+        if (nomePaciente.isEmpty() || data.trim().length() < 10 || horario.trim().length() < 5 || CRMVVeterinario.trim().length() < 6 || CPFCliente.trim().length() < 14) {
+            JOptionPane.showMessageDialog(null, "Existem campos invalidos!\nFavor preencher");
+            return;
+        }
         
         // Criação das classes
         Cliente c = new Cliente();

@@ -140,6 +140,12 @@ public class FrameAlterarAgendamento extends javax.swing.JFrame {
             stmt.setString(1, CPF);
             
             rs = stmt.executeQuery();
+
+            if (!rs.next()) {
+                JOptionPane.showMessageDialog(null, "Cliente Inexistente!");
+                return;
+            }
+
             rs.first();
             jLabelNomeCliente.setText(rs.getString("nome_cliente"));
             
@@ -361,6 +367,12 @@ public class FrameAlterarAgendamento extends javax.swing.JFrame {
     private void jButtonBuscarCPFMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonBuscarCPFMouseClicked
         
         String CPF = jFormattedTextFieldCPFCliente.getText();
+
+        // Verifica campos em branco
+        if (CPF.trim().length() < 14) {
+            JOptionPane.showMessageDialog(null, "Existem campos invalidos!\nFavor preencher");
+            return;
+        }
         
         mostrarAgendamentos(CPF);
         
@@ -418,7 +430,11 @@ public class FrameAlterarAgendamento extends javax.swing.JFrame {
 
         
         Agendamento agendamentoNovo = new Agendamento();
-        agendamentoNovo.setDataAgendamento(agendamentoNovo.BRtoLocalDate(jFormattedTextFieldData.getText()));
+        try {
+            agendamentoNovo.setDataAgendamento(agendamentoNovo.BRtoLocalDate(jFormattedTextFieldData.getText()));
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
         agendamentoNovo.setHorarioAgendamento(agendamentoNovo.toTime(jFormattedTextFieldHorario.getText()));
 
 

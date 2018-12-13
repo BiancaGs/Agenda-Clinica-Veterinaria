@@ -195,7 +195,6 @@ public class FrameExcluirAgendamento extends javax.swing.JFrame {
         c.setCPFCliente(CPFCliente);
         facade.setCliente(c);
 
-
         if (facade.remover() == true) {
             new FrameOpcoesAgenda().setVisible(true);
             setVisible(false);

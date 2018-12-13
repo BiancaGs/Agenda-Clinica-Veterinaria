@@ -119,6 +119,13 @@ public class FrameBuscarAgendamento extends javax.swing.JFrame {
             stmt.setString(1, CPF);
             
             rs = stmt.executeQuery();
+
+            // Verifica se o Cliente Existe
+            if (!rs.next()) {
+                JOptionPane.showMessageDialog(null, "Cliente Inexistente!");
+                return;
+            }
+
             rs.first();
             jLabelCPF.setText(rs.getString("nome_cliente"));
             
@@ -301,6 +308,11 @@ public class FrameBuscarAgendamento extends javax.swing.JFrame {
 
     private void jButtonBuscarCPFMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonBuscarCPFMouseClicked
         String CPF = jFormattedTextFieldCPFCliente1.getText();
+
+        if (CPF.trim().length() < 14) {
+            JOptionPane.showMessageDialog(null, "Campo invalido!");
+            return;
+        }
         
         mostrarAgendamentos(CPF);
     }//GEN-LAST:event_jButtonBuscarCPFMouseClicked
