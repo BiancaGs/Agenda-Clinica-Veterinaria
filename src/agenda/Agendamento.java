@@ -106,7 +106,7 @@ public class Agendamento {
     public boolean verificarExpediente(Time timeAgendamento){
         
         String inicioExpediente = "08:00:00";
-        String fimExpediente = "17:00:00";
+        String fimExpediente = "19:00:00";
         
         String time = timeAgendamento.toString();
         if( time.compareTo(inicioExpediente)>=0 && time.compareTo(fimExpediente)<0 ){
