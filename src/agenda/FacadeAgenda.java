@@ -81,7 +81,7 @@ public class FacadeAgenda {
         try {
             rsV = op.buscarVeterinario(conn, this.veterinario.getCRMV());
             if (!rsV.next()) {
-                JOptionPane.showMessageDialog(null, "Veterinario Inexistente!");    
+                JOptionPane.showMessageDialog(null, "Veterinário não Cadastrado!\nFavor inserir outro.");    
                 return false;
             }
             else {
@@ -92,14 +92,14 @@ public class FacadeAgenda {
                 v.setEmailVeterinario(rsV.getString("email_veterinario"));
             }
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Veterinario Inexistente!");
+            JOptionPane.showMessageDialog(null, "Veterinário não Cadastrado!\nFavor inserir outro.");
         }
         
         //Busca se existe o Paciente
         try {
             rsP = op.buscarPaciente(conn, this.paciente.getNomePaciente());
             if (!rsP.next()) {
-                JOptionPane.showMessageDialog(null, "Paciente Inexistente!");    
+                JOptionPane.showMessageDialog(null, "Paciente não Cadastrado!\nFavor Realizar o Cadastro.");    
                 return false;
             }
             else {
@@ -107,14 +107,14 @@ public class FacadeAgenda {
                 p.setNomePaciente(rsP.getString("nome_paciente"));
             }
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Paciente Inexistente!");
+            JOptionPane.showMessageDialog(null, "Paciente não Cadastrado!\nFavor Realizar o Cadastro.");
         }
         
         //Busca se existe o Cliente
         try {
             rsC = op.buscarCliente(conn, this.cliente.getCPFCliente());
             if (!rsC.next()) {
-                JOptionPane.showMessageDialog(null, "Cliente Inexistente!");    
+                JOptionPane.showMessageDialog(null, "Cliente não Cadastrado!\nFavor Realizar o Cadastro.");    
                 return false;
             }
             else {
@@ -125,7 +125,7 @@ public class FacadeAgenda {
                 c.setEmailCliente(rsC.getString("email_cliente"));
             }
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Cliente Inexistente!");
+            JOptionPane.showMessageDialog(null,  "Cliente não Cadastrado!\nFavor Realizar o Cadastro.");
         }
         
         new FrameConfirmarAgendamento(c, p, v, this.agendamento).setVisible(true);
