@@ -169,13 +169,13 @@ public class FrameOpcoesAgenda extends javax.swing.JFrame {
         }
         
         else if (jRadioButtonBuscarAgendamento.isSelected()) {
-            new FrameBuscar().setVisible(true);
+            new FrameBuscarAgendamento().setVisible(true);
             setVisible(false);
             dispose();
         }
         
         else if (jRadioButtonAlterarAgendamento.isSelected()) {
-            new FrameAlterar().setVisible(true);
+            new FrameAlterarAgendamento().setVisible(true);
             setVisible(false);
             dispose();
         }

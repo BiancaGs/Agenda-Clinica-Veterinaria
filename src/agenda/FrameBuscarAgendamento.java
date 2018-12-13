@@ -22,7 +22,7 @@ import javax.swing.text.MaskFormatter;
  *
  * @author Usuario
  */
-public class FrameBuscar extends javax.swing.JFrame {
+public class FrameBuscarAgendamento extends javax.swing.JFrame {
     
     public class Dados {
         private String dataAgendamento, horarioAgendamento, CPFCliente, nomeCliente, nomePaciente, CRMV, nomeVeterinario;
@@ -62,7 +62,7 @@ public class FrameBuscar extends javax.swing.JFrame {
     /**
      * Creates new form FrameOpcoesBuscar
      */
-    public FrameBuscar() {
+    public FrameBuscarAgendamento() {
         initComponents();
         formatarCPF();
     }
@@ -96,7 +96,7 @@ public class FrameBuscar extends javax.swing.JFrame {
             }
             
         } catch (SQLException ex) {
-            Logger.getLogger(FrameBuscar.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(FrameBuscarAgendamento.class.getName()).log(Level.SEVERE, null, ex);
         }
         
         return listaDados;
@@ -123,7 +123,7 @@ public class FrameBuscar extends javax.swing.JFrame {
             jLabelCPF.setText(rs.getString("nome_cliente"));
             
         } catch (SQLException ex) {
-            Logger.getLogger(FrameBuscar.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(FrameBuscarAgendamento.class.getName()).log(Level.SEVERE, null, ex);
         }
         
         
@@ -328,21 +328,23 @@ public class FrameBuscar extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FrameBuscar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrameBuscarAgendamento.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FrameBuscar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrameBuscarAgendamento.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FrameBuscar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrameBuscarAgendamento.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FrameBuscar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrameBuscarAgendamento.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FrameBuscar().setVisible(true);
+                new FrameBuscarAgendamento().setVisible(true);
             }
         });
     }
