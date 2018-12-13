@@ -19,140 +19,77 @@ import static org.junit.Assert.*;
  * @author Usuario
  */
 public class OperacoesBDTest {
-    
-    public OperacoesBDTest() {
-    }
-    
-    @BeforeClass
-    public static void setUpClass() {
-    }
-    
-    @AfterClass
-    public static void tearDownClass() {
-    }
-    
-    @Before
-    public void setUp() {
-    }
-    
-    @After
-    public void tearDown() {
-    }
 
-    /**
-     * Test of inserirAgendamento method, of class OperacoesBD.
-     */
+    
     @Test
-    public void testInserirAgendamento() throws Exception {
-        System.out.println("inserirAgendamento");
-        Connection conn = null;
-        Cliente c = null;
-        Paciente p = null;
-        Agendamento a = null;
-        Veterinario v = null;
-        OperacoesBD instance = new OperacoesBD();
-        instance.inserirAgendamento(conn, c, p, a, v);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+    public void testBuscarVeterinarioEXISTENTE() throws Exception {
+        Connection conn = Conexao.getConnection();
+        String CRMVVeterinario = "12325";
+        OperacoesBD instancia = new OperacoesBD();
+        ResultSet resultado = instancia.buscarVeterinario(conn, CRMVVeterinario);
+        assertEquals(true, resultado.next());
     }
 
-    /**
-     * Test of buscarVeterinario method, of class OperacoesBD.
-     */
+
     @Test
-    public void testBuscarVeterinario() throws Exception {
-        System.out.println("buscarVeterinario");
-        Connection conn = null;
-        String CRMVVeterinario = "";
-        OperacoesBD instance = new OperacoesBD();
-        ResultSet expResult = null;
-        ResultSet result = instance.buscarVeterinario(conn, CRMVVeterinario);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+    public void testBuscarVeterinarioINEXISTENTE() throws Exception {
+        Connection conn = Conexao.getConnection();
+        String CRMVVeterinario = "9999";
+        OperacoesBD instancia = new OperacoesBD();
+        ResultSet resultado = instancia.buscarVeterinario(conn, CRMVVeterinario);
+        assertEquals(false, resultado.next());
     }
 
-    /**
-     * Test of buscarPaciente method, of class OperacoesBD.
-     */
+
     @Test
-    public void testBuscarPaciente() throws Exception {
-        System.out.println("buscarPaciente");
-        Connection conn = null;
-        String nomePaciente = "";
-        OperacoesBD instance = new OperacoesBD();
-        ResultSet expResult = null;
-        ResultSet result = instance.buscarPaciente(conn, nomePaciente);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+    public void testBuscarPacienteEXISTENTE() throws Exception {
+        Connection conn = Conexao.getConnection();
+        String nomePaciente = "Pipoca";
+        OperacoesBD instancia = new OperacoesBD();
+        ResultSet resultado = instancia.buscarPaciente(conn, nomePaciente);
+        assertEquals(true, resultado.next());
     }
 
-    /**
-     * Test of buscarCliente method, of class OperacoesBD.
-     */
+
     @Test
-    public void testBuscarCliente() throws Exception {
-        System.out.println("buscarCliente");
-        Connection conn = null;
-        String CPFCliente = "";
-        OperacoesBD instance = new OperacoesBD();
-        ResultSet expResult = null;
-        ResultSet result = instance.buscarCliente(conn, CPFCliente);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+    public void testBuscarPacienteINEXISTENTE() throws Exception {
+        Connection conn = Conexao.getConnection();
+        String nomePaciente = "Bolinha";
+        OperacoesBD instancia = new OperacoesBD();
+        ResultSet resultado = instancia.buscarPaciente(conn, nomePaciente);
+        assertEquals(false, resultado.next());
     }
 
-    /**
-     * Test of verificarDisponibilidade method, of class OperacoesBD.
-     */
+
+    @Test
+    public void testBuscarClienteEXISTENTE() throws Exception {
+        Connection conn = Conexao.getConnection();
+        String CPFCliente = "444.618.208-07";
+        OperacoesBD instancia = new OperacoesBD();
+        ResultSet resultado = instancia.buscarCliente(conn, CPFCliente);
+        assertEquals(true, resultado.next());
+    }
+
+
+    @Test
+    public void testBuscarClienteINEXISTENTE() throws Exception {
+        Connection conn = Conexao.getConnection();
+        String CPFCliente = "124.617.456-08";
+        OperacoesBD instancia = new OperacoesBD();
+        ResultSet resultado = instancia.buscarCliente(conn, CPFCliente);
+        assertEquals(false, resultado.next());
+    }
+
+
     @Test
     public void testVerificarDisponibilidade() throws Exception {
-        System.out.println("verificarDisponibilidade");
-        Connection conn = null;
-        String dataAgendamento = "";
-        String horarioAgendamento = "";
-        String CRMV = "";
-        OperacoesBD instance = new OperacoesBD();
-        boolean expResult = false;
-        boolean result = instance.verificarDisponibilidade(conn, dataAgendamento, horarioAgendamento, CRMV);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of removerAgendamento method, of class OperacoesBD.
-     */
-    @Test
-    public void testRemoverAgendamento() throws Exception {
-        System.out.println("removerAgendamento");
-        Connection conn = null;
-        Agendamento a = null;
-        String CPFCliente = "";
-        OperacoesBD instance = new OperacoesBD();
-        instance.removerAgendamento(conn, a, CPFCliente);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of atualizarAgendamento method, of class OperacoesBD.
-     */
-    @Test
-    public void testAtualizarAgendamento() throws Exception {
-        System.out.println("atualizarAgendamento");
-        Connection conn = null;
-        Agendamento antigo = null;
-        Agendamento novo = null;
-        Cliente c = null;
-        Veterinario v = null;
-        Paciente p = null;
-        OperacoesBD instance = new OperacoesBD();
-        instance.atualizarAgendamento(conn, antigo, novo, c, v, p);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        Connection conn = Conexao.getConnection();
+        String dataAgendamento = "2019-12-25";
+        String horarioAgendamento = "10:00:00";
+        String CRMV = "12325";
+        OperacoesBD instancia = new OperacoesBD();
+        boolean resultado = instancia.verificarDisponibilidade(conn, dataAgendamento, horarioAgendamento, CRMV);
+        assertEquals(true, resultado);
     }
     
 }
