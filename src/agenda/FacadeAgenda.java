@@ -45,7 +45,7 @@ public class FacadeAgenda {
         new FrameOpcoesAgenda().setVisible(true);
     }
     
-    public boolean agendarAgendamento() {
+    public boolean agendar() {
         
         // Verifica se o agendamento está no expediente da Clínica
         if (!agendamento.verificarExpediente(agendamento.getHorarioAgendamento())) {
@@ -131,6 +131,28 @@ public class FacadeAgenda {
         new FrameConfirmarAgendamento(c, p, v, this.agendamento).setVisible(true);
         return true;
     
+    }
+
+    public boolean remover() {
+
+        OperacoesBD op = new OperacoesBD();
+        try {
+            Connection conn = Conexao.getConnection();
+            int resultado = op.removerAgendamento(conn, this.agendamento, this.cliente.getCPFCliente());
+            
+            if (resultado != 0) {
+                JOptionPane.showMessageDialog(null, "Agendamento Excluído com Sucesso!"); 
+                return true;           
+            } else {
+                JOptionPane.showMessageDialog(null, "Falha na Exclusão do Agendamento!");
+                return false;
+            }
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Falha na Exclusão do Agendamento!");
+            return false;
+        }
+
     }
             
             

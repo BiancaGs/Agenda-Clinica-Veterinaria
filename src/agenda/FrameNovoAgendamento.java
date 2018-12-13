@@ -247,7 +247,7 @@ public class FrameNovoAgendamento extends javax.swing.JFrame {
         facade.setAgendamento(a);
         
         // Realiza o agendamento && Fecha o frame NovoAgendamento após ConfirmarAgendamento 
-        if (facade.agendarAgendamento()) {
+        if (facade.agendar()) {
             setVisible(false);
             dispose();
         }

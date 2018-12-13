@@ -188,23 +188,18 @@ public class FrameExcluirAgendamento extends javax.swing.JFrame {
         a.setDataAgendamento(a.UStoLocalDate(dataUS));
         a.setHorarioAgendamento(a.toTime(horarioAgendamento));
         
-        
-        OperacoesBD op = new OperacoesBD();
-        try {
-            Connection conn = Conexao.getConnection();
-            int resultado = op.removerAgendamento(conn, a, CPFCliente);
-            
-            if (resultado != 0)
-                JOptionPane.showMessageDialog(null, "Agendamento Excluído com Sucesso!");            
-            else
-                JOptionPane.showMessageDialog(null, "Falha na Exclusão do Agendamento!");
+        FacadeAgenda facade = new FacadeAgenda();
+        facade.setAgendamento(a);
 
+        Cliente c = new Cliente();
+        c.setCPFCliente(CPFCliente);
+        facade.setCliente(c);
+
+
+        if (facade.remover() == true) {
             new FrameOpcoesAgenda().setVisible(true);
             setVisible(false);
             dispose();
-
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Falha na Exclusão do Agendamento!");
         }
 
         
