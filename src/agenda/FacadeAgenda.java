@@ -154,6 +154,24 @@ public class FacadeAgenda {
         }
 
     }
+
+    public boolean alterar(Agendamento antigo) {
+
+        OperacoesBD op = new OperacoesBD();
+        try {
+            Connection conn = Conexao.getConnection();
+
+            op.atualizarAgendamento(conn, antigo, this.agendamento, this.cliente, this.veterinario, this.paciente);
+            
+            JOptionPane.showMessageDialog(null, "Agendamento Alterado com Sucesso!");
+            return true;
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Falha na Alteração do Agendamento!\n" + ex);
+            return false;
+        }
+
+    }
             
             
 }

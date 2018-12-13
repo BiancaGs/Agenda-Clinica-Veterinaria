@@ -426,22 +426,17 @@ public class FrameAlterarAgendamento extends javax.swing.JFrame {
         cliente.setCPFCliente(jFormattedTextFieldCPFCliente.getText());
 
         
+        FacadeAgenda facade = new FacadeAgenda();
+        facade.setAgendamento(agendamentoNovo);
+        facade.setCliente(cliente);
+        facade.setVeterinario(this.veterinario);
+        facade.setPaciente(this.paciente);
 
-        OperacoesBD op = new OperacoesBD();
-        try {
-            Connection conn = Conexao.getConnection();
 
-            op.atualizarAgendamento(conn, this.agendamentoAntigo, agendamentoNovo, cliente, this.veterinario, this.paciente);
-            
-            JOptionPane.showMessageDialog(null, "Agendamento Alterado com Sucesso!");            
-
+        if (facade.alterar(this.agendamentoAntigo) == true) {
             new FrameOpcoesAgenda().setVisible(true);
             setVisible(false);
             dispose();
-
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Falha na Alteração do Agendamento!");
-            JOptionPane.showMessageDialog(null, ex);
         }
 
 
