@@ -91,5 +91,17 @@ public class OperacoesBDTest {
         boolean resultado = instancia.verificarDisponibilidade(conn, dataAgendamento, horarioAgendamento, CRMV);
         assertEquals(true, resultado);
     }
+
+    @Test
+    // Verifica datas que ja passaram
+    public void testVerificarDisponibilidade2() throws Exception {
+        Connection conn = Conexao.getConnection();
+        String dataAgendamento = "2018-08-20";
+        String horarioAgendamento = "10:00:00";
+        String CRMV = "12325";
+        OperacoesBD instancia = new OperacoesBD();
+        boolean resultado = instancia.verificarDisponibilidade(conn, dataAgendamento, horarioAgendamento, CRMV);
+        assertEquals(false, resultado);
+    }
     
 }

@@ -20,24 +20,10 @@ import static org.junit.Assert.*;
  */
 public class AgendamentoTest {
     
-    private Agendamento a;
 
-    @Before
-    public void setUp() {
-        a = new Agendamento();    
-    }
-    
-    @After
-    public void tearDown() {
-        a = null;
-    }
 
-    /**
-     * Test of toBRFormat method, of class Agendamento.
-     */
     @Test
     public void testToBRFormat() {
-        System.out.println("toBRFormat");
         String data = "2019-01-12";
         Agendamento instance = new Agendamento();
         String expResult = "12/01/2019";
@@ -45,12 +31,9 @@ public class AgendamentoTest {
         assertEquals(expResult, result);
     }
 
-    /**
-     * Test of toUSFormat method, of class Agendamento.
-     */
+
     @Test
     public void testToUSFormat() {
-        System.out.println("toUSFormat");
         String data = "24/08/2019";
         Agendamento instance = new Agendamento();
         String expResult = "2019-08-24";
@@ -58,71 +41,40 @@ public class AgendamentoTest {
         assertEquals(expResult, result);
     }
 
-    /**
-     * Test of BRtoLocalDate method, of class Agendamento.
-     */
+
     @Test
     public void testBRtoLocalDate() {
-        System.out.println("BRtoLocalDate");
         String data = "18/02/2019";
         Agendamento instance = new Agendamento();
         LocalDate result = instance.BRtoLocalDate(data);
         assertNotNull(result);
     }
 
-    /**
-     * Test of UStoLocalDate method, of class Agendamento.
-     */
+
     @Test
     public void testUStoLocalDate() {
-        System.out.println("UStoLocalDate");
         String data = "2018-12-25";
         Agendamento instance = new Agendamento();
         LocalDate result = instance.UStoLocalDate(data);
         assertNotNull(result);
     }
 
-    /**
-     * Test of toTime method, of class Agendamento.
-     */
+
     @Test
     public void testToTime() {
-        System.out.println("toTime");
         String horario = "15:20";
         Agendamento instance = new Agendamento();
         Time result = instance.toTime(horario);
         assertNotNull(result);
     }
 
-    /**
-     * Test of verificarExpediente method, of class Agendamento.
-     */
+
     @Test
     public void testVerificarExpediente() {
-        System.out.println("verificarExpediente");
-        Time timeAgendamento = null;
+        String horario = "15:00:00";
         Agendamento instance = new Agendamento();
-        boolean expResult = false;
-        boolean result = instance.verificarExpediente(timeAgendamento);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        boolean result = instance.verificarExpediente(instance.toTime(horario)  );
+        assertEquals(true, result);
     }
 
-    /**
-     * Test of verificarDisponibilidade method, of class Agendamento.
-     */
-    @Test
-    public void testVerificarDisponibilidade() {
-        System.out.println("verificarDisponibilidade");
-        LocalDate dateAgendamento = null;
-        Time timeAgendamento = null;
-        Agendamento instance = new Agendamento();
-        boolean expResult = false;
-        boolean result = instance.verificarDisponibilidade(dateAgendamento, timeAgendamento);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-    
 }

@@ -115,10 +115,5 @@ public class Agendamento {
         
         return false;
     }
-    
-    public boolean verificarDisponibilidade(LocalDate dateAgendamento, Time timeAgendamento){
-        
-        return false;
-    }
 
 }
