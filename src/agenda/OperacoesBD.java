@@ -94,7 +94,7 @@ public class OperacoesBD {
 
     }
 
-    public void removerAgendamento(Connection conn, Agendamento a, String CPFCliente) throws SQLException {
+    public int removerAgendamento(Connection conn, Agendamento a, String CPFCliente) throws SQLException {
 
         String deleteSQL = "DELETE FROM agendamento WHERE data_agendamento = ? AND horario_agendamento = ? AND cpf_cliente = ?;";
 
@@ -104,8 +104,9 @@ public class OperacoesBD {
         stmt.setString(2, a.getHorarioAgendamento().toString());
         stmt.setString(3, CPFCliente);
 
-        stmt.execute();
-        stmt.close();
+        int resultado = stmt.executeUpdate();
+
+        return resultado;
         
     }
 
