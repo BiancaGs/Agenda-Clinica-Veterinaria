@@ -20,13 +20,16 @@ import static org.junit.Assert.*;
  */
 public class AgendamentoTest {
     
+    private Agendamento a;
+
     @Before
     public void setUp() {
-        Agendamento a = new Agendamento();    
+        a = new Agendamento();    
     }
     
     @After
     public void tearDown() {
+        a = null;
     }
 
     /**
@@ -61,13 +64,10 @@ public class AgendamentoTest {
     @Test
     public void testBRtoLocalDate() {
         System.out.println("BRtoLocalDate");
-        String data = "";
+        String data = "18/02/2019";
         Agendamento instance = new Agendamento();
-        LocalDate expResult = null;
         LocalDate result = instance.BRtoLocalDate(data);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        assertNotNull(result);
     }
 
     /**
@@ -76,13 +76,10 @@ public class AgendamentoTest {
     @Test
     public void testUStoLocalDate() {
         System.out.println("UStoLocalDate");
-        String data = "";
+        String data = "2018-12-25";
         Agendamento instance = new Agendamento();
-        LocalDate expResult = null;
         LocalDate result = instance.UStoLocalDate(data);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        assertNotNull(result);
     }
 
     /**
@@ -91,13 +88,10 @@ public class AgendamentoTest {
     @Test
     public void testToTime() {
         System.out.println("toTime");
-        String horario = "";
+        String horario = "15:20";
         Agendamento instance = new Agendamento();
-        Time expResult = null;
         Time result = instance.toTime(horario);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        assertNotNull(result);
     }
 
     /**
