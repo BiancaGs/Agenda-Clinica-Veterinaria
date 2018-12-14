@@ -184,10 +184,19 @@ public class FrameExcluirAgendamento extends javax.swing.JFrame {
         String horarioAgendamento = jFormattedTextFieldHorario.getText();
         String CPFCliente = jFormattedTextFieldCPFCliente.getText();
 
+        if (CPFCliente.trim().length() < 14 || horarioAgendamento.trim().length() < 5 || dataAgendamento.trim().length() < 10) {
+            JOptionPane.showMessageDialog(null, "Existem campos inválidos!\nFavor verificar.");
+            return;
+        }
         
         Agendamento a = new Agendamento();
         String dataUS = a.toUSFormat(dataAgendamento);
-        a.setDataAgendamento(a.UStoLocalDate(dataUS));
+        try {
+            a.setDataAgendamento(a.UStoLocalDate(dataUS));
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Erro na formatação da data.\n");
+            return;
+        }
         a.setHorarioAgendamento(a.toTime(horarioAgendamento));
         
         FacadeAgenda facade = new FacadeAgenda();
