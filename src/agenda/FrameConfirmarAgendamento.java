@@ -11,7 +11,8 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author pietr
+ * @author Pietro
+ * @author Bianca
  */
 public class FrameConfirmarAgendamento extends javax.swing.JFrame {
 

@@ -16,6 +16,7 @@ import javax.swing.JOptionPane;
 /**
  *
  * @author Bianca
+ * @author Pietro
  */
 public class Agendamento {
     

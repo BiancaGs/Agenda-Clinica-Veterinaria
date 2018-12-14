@@ -16,7 +16,8 @@ import static org.junit.Assert.*;
 
 /**
  *
- * @author Usuario
+ * @author Pietro
+ * @author Bianca
  */
 public class AgendamentoTest {
     

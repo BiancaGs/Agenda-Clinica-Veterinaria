@@ -22,7 +22,8 @@ import javax.swing.text.MaskFormatter;
 
 /**
  *
- * @author Usuario
+ * @author Pietro
+ * @author Bianca
  */
 public class FrameVisualizarAgendamentos extends javax.swing.JFrame {
 

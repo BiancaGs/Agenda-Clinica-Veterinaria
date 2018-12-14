@@ -15,7 +15,8 @@ import org.junit.Before;
 
 /**
  *
- * @author pietr
+ * @author Pietro
+ * @author Bianca
  */
 public class TesteAgendamento {
     

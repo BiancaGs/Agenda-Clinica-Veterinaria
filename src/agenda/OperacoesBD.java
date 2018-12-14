@@ -14,7 +14,8 @@ import java.util.logging.Logger;
 
 /**
  *
- * @author pietr
+ * @author Pietro
+ * @author Bianca
  * 
  */
 public class OperacoesBD {

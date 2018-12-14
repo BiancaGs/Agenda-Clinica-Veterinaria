@@ -7,7 +7,8 @@ package agenda;
 
 /**
  *
- * @author pietr
+ * @author Pietro
+ * @author Bianca
  */
 public class Cliente {
  

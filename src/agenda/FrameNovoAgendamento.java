@@ -308,9 +308,6 @@ public class FrameNovoAgendamento extends javax.swing.JFrame {
         });
     }
     
-    /**
-     * @author Pietro
-     */
     private void formatarData() {
         try {
             MaskFormatter mask = new MaskFormatter("##/##/####");
