@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package agenda;
+package agendaTestes;
 
+import agenda.Agendamento;
 import java.sql.Time;
 import java.time.LocalDate;
 import org.junit.After;

@@ -40,6 +40,7 @@ public class FrameOpcoesAgenda extends javax.swing.JFrame {
         jRadioButtonAlterarAgendamento = new javax.swing.JRadioButton();
         jRadioButtonExcluirAgendamento = new javax.swing.JRadioButton();
         jRadioButtonVisualizarAgendamentos = new javax.swing.JRadioButton();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -101,6 +102,9 @@ public class FrameOpcoesAgenda extends javax.swing.JFrame {
         jRadioButtonVisualizarAgendamentos.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jRadioButtonVisualizarAgendamentos.setText("Visualizar Agendamentos");
 
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/agenda/imagens/doggy.png"))); // NOI18N
+        jLabel2.setText("jLabel2");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -109,7 +113,7 @@ public class FrameOpcoesAgenda extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 181, Short.MAX_VALUE)
+                        .addGap(0, 197, Short.MAX_VALUE)
                         .addComponent(jButtonCancelar)
                         .addGap(18, 18, 18)
                         .addComponent(jButtonConfirmar)
@@ -123,9 +127,11 @@ public class FrameOpcoesAgenda extends javax.swing.JFrame {
                             .addComponent(jRadioButtonNovoAgendamento)
                             .addComponent(jRadioButtonAlterarAgendamento)
                             .addComponent(jRadioButtonBuscarAgendamento)
-                            .addComponent(jRadioButtonVisualizarAgendamentos)
-                            .addComponent(jRadioButtonExcluirAgendamento))
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                            .addComponent(jRadioButtonExcluirAgendamento)
+                            .addComponent(jRadioButtonVisualizarAgendamentos))
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                        .addGap(26, 26, 26))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -133,15 +139,18 @@ public class FrameOpcoesAgenda extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jRadioButtonNovoAgendamento)
-                .addGap(18, 18, 18)
-                .addComponent(jRadioButtonBuscarAgendamento)
-                .addGap(18, 18, 18)
-                .addComponent(jRadioButtonAlterarAgendamento)
-                .addGap(18, 18, 18)
-                .addComponent(jRadioButtonVisualizarAgendamentos)
-                .addGap(18, 18, 18)
-                .addComponent(jRadioButtonExcluirAgendamento)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jRadioButtonNovoAgendamento)
+                        .addGap(18, 18, 18)
+                        .addComponent(jRadioButtonBuscarAgendamento)
+                        .addGap(18, 18, 18)
+                        .addComponent(jRadioButtonAlterarAgendamento)
+                        .addGap(18, 18, 18)
+                        .addComponent(jRadioButtonVisualizarAgendamentos)
+                        .addGap(18, 18, 18)
+                        .addComponent(jRadioButtonExcluirAgendamento))
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonConfirmar)
@@ -244,6 +253,7 @@ public class FrameOpcoesAgenda extends javax.swing.JFrame {
     private javax.swing.JButton jButtonCancelar;
     private javax.swing.JButton jButtonConfirmar;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JRadioButton jRadioButtonAlterarAgendamento;
     private javax.swing.JRadioButton jRadioButtonBuscarAgendamento;
     private javax.swing.JRadioButton jRadioButtonExcluirAgendamento;
