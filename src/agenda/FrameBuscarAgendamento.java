@@ -110,6 +110,9 @@ public class FrameBuscarAgendamento extends javax.swing.JFrame {
         DefaultTableModel modelo = (DefaultTableModel) jTableBusca.getModel();
         modelo.setNumRows(0);
 
+        // Zera a label do nome do cliente
+        jLabelCPF.setText("");
+        
         // Pega o nome do cliente com o CPF dado
         String nomeSQL = "SELECT nome_cliente FROM cliente WHERE cpf_cliente = ?;";
         ResultSet rs = null;
@@ -120,13 +123,13 @@ public class FrameBuscarAgendamento extends javax.swing.JFrame {
             stmt.setString(1, CPF);
             
             rs = stmt.executeQuery();
-
+            
             // Verifica se o Cliente Existe
             if (!rs.next()) {
                 JOptionPane.showMessageDialog(null, "Cliente Inexistente!");
                 return;
             }
-
+            
             rs.first();
             jLabelCPF.setText(rs.getString("nome_cliente"));
             
@@ -134,6 +137,11 @@ public class FrameBuscarAgendamento extends javax.swing.JFrame {
             Logger.getLogger(FrameBuscarAgendamento.class.getName()).log(Level.SEVERE, null, ex);
         }
         
+        // Verifica se nao existe nenhum agendamento
+        if (lista.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Nenhum Agendamento Encontrado!");
+            return;
+        }
         
         // Imprime os dados da lista na tabela
         Object rowData[] = new Object[4];
