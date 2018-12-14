@@ -283,6 +283,7 @@ public class FrameVisualizarAgendamentos extends javax.swing.JFrame {
 
         if (dataAgendamento.trim().length() < 10) {
             JOptionPane.showMessageDialog(null, "Existem Campos Invalidos!\nFavor preencher.");
+            return;
         }
         
         Agendamento a = new Agendamento();
