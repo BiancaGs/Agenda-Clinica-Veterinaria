@@ -350,7 +350,8 @@ public class FrameAlterarAgendamento extends javax.swing.JFrame {
                 .addGap(30, 46, Short.MAX_VALUE))
         );
 
-        pack();
+        setSize(new java.awt.Dimension(893, 411));
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonBuscarCPFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBuscarCPFActionPerformed

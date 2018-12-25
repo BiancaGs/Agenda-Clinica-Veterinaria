@@ -197,7 +197,8 @@ public class FrameNovoAgendamento extends javax.swing.JFrame {
                 .addGap(30, 30, 30))
         );
 
-        pack();
+        setSize(new java.awt.Dimension(452, 334));
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConfirmarActionPerformed

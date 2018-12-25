@@ -359,7 +359,8 @@ public class FrameConfirmarAgendamento extends javax.swing.JFrame {
                 .addGap(40, 40, 40))
         );
 
-        pack();
+        setSize(new java.awt.Dimension(646, 427));
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jTextFieldDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldDataActionPerformed
